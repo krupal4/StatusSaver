@@ -2,5 +2,9 @@
     "helloWorld": "Hello World!",
     "@helloWorld": {
         "description": "The conventional newborn programmer greeting"
+    },
+    "appTitle": "WhatsApp Status Saver",
+    "@appTitle": {
+        "description": "The application's title"
     }
 }
