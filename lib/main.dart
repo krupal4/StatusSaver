@@ -1,4 +1,5 @@
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:status_saver/screens/home_screen.dart';
 import 'common.dart';
 
 void main() {
@@ -7,7 +8,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
 
-  static const numOfTabs = 2;
   const MyApp({super.key});
 
   @override
@@ -28,23 +28,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: DefaultTabController(
-        length: numOfTabs, 
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(AppLocalizations.of(context)!.appTitle),
-            bottom: const TabBar(
-              tabs: [
-                Text("Recent"),
-                Text("Saved")
-            ]),
-            ),
-          body: const TabBarView(
-            children: [
-                Text("Body")
-              ],
-          ),
-        )),
+      home: const HomeScreen(),
     );
   }
 }
