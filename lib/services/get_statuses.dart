@@ -2,8 +2,7 @@ import 'dart:io';
 
 import 'package:status_saver/common.dart';
 import 'package:status_saver/constants.dart';
-
-import 'get_storage_permissions.dart';
+import 'package:status_saver/services/get_storage_permissions.dart';
 
 Future<List<FileSystemEntity>> getStatuses() async {
 
@@ -42,6 +41,7 @@ Future<List<FileSystemEntity>> getStatuses() async {
 /// remove unnecessary files which are not statuses
 List<FileSystemEntity> filter(List<FileSystemEntity> statues) {
   return statues.where((status) {
-    return status.path.endsWith('.mp4') || status.path.endsWith('.jpg');
+    // return status.path.endsWith('.mp4') || status.path.endsWith('.jpg');
+    return status.path.endsWith('.jpg');
   }).toList();
 }

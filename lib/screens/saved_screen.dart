@@ -8,8 +8,16 @@ class SavedScreen extends StatefulWidget {
 }
 
 class _SavedScreenState extends State<SavedScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    log('init of saved');
+  }
+
   @override
   Widget build(BuildContext context) {
+    log("build of recent");
     return const Placeholder();
   }
 }

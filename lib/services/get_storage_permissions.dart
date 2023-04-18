@@ -18,6 +18,12 @@ Future<bool> getStoragePermissions() async {
     return true;
   } else {
     // request for permission
-    return false;
+    if (androidInfo.version.sdkInt >= 33) {
+      Permission.manageExternalStorage.request();
+      return await Permission.manageExternalStorage.status.isGranted;
+    } else {
+      Permission.storage.request();
+      return await Permission.storage.status.isGranted;
+    }
   }
 }
