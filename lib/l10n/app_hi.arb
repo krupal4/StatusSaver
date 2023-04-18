@@ -1,4 +1,6 @@
 {
     "helloWorld": "केसे है",
-    "appTitle": "व्हाट्सएप स्थिति सेवर"
+    "appTitle": "व्हाट्सएप स्थिति सेवर",
+    "recentStatuses": "हाल ही में देखे गए",
+    "savedStatuses": "सेव हो गया"
 }

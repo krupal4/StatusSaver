@@ -6,5 +6,13 @@
     "appTitle": "WhatsApp Status Saver",
     "@appTitle": {
         "description": "The application's title"
+    },
+    "recentStatuses": "Recent",
+    "@recentStatuses": {
+        "description": "Recently seen statuses"
+    },
+    "savedStatuses": "Saved",
+    "@savedStatuses": {
+        "description": "Saved statuses"
     }
 }

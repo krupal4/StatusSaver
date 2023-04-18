@@ -18,11 +18,11 @@ class _HomeScreenState extends State<HomeScreen> {
       length: HomeScreen.numOfTabs, 
       child: Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.appTitle),
-          bottom: const TabBar(
+          title: Text(AppLocalizations.of(context)?.appTitle ?? "WhatsApp Status Saver"),
+          bottom: TabBar(
             tabs: [
-              MyTab(tabName: "Recent"),
-              MyTab(tabName: "Saved"),
+              MyTab(tabName: AppLocalizations.of(context)?.recentStatuses ?? "Recent"),
+              MyTab(tabName: AppLocalizations.of(context)?.savedStatuses ?? "Saved"),
           ]),
           ),
         body: const TabBarView(

@@ -1,4 +1,6 @@
 {
     "helloWorld": "રામ રામ",
-    "appTitle": "વોટ્સએપ સ્ટેટસ સેવર"
+    "appTitle": "સેવ વોટ્સએપ સ્ટેટસ",
+    "recentStatuses": "તાજેતરનુ",
+    "savedStatuses": "સચવાયેલ"
 }
