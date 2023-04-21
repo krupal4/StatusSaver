@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:status_saver/services/get_statuses.dart';
 import 'package:status_saver/widgets/image_tile.dart';
 import 'package:status_saver/common.dart';
+import 'package:status_saver/widgets/video_tile.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class RecentScreen extends StatefulWidget {
   const RecentScreen({super.key});
@@ -29,9 +31,13 @@ class _RecentScreenState extends State<RecentScreen> {
       future: _statuses,
       builder: (context, snapshot) {
         if(snapshot.connectionState == ConnectionState.done ) {
-            return GridView.builder(
+            return StaggeredGridView.countBuilder(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              crossAxisCount: 2,
+              mainAxisSpacing: 5,
+              crossAxisSpacing: 5,
+              staggeredTileBuilder: (index) => const StaggeredTile.fit(1),
               itemCount: snapshot.data!.length,
-              gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,crossAxisSpacing: 10,mainAxisSpacing: 5),
               itemBuilder: (context, index) {
                 final String statusPath  = snapshot.data![index].path;
                 if(statusPath.endsWith('.jpg')) {

@@ -41,7 +41,6 @@ Future<List<FileSystemEntity>> getStatuses() async {
 /// remove unnecessary files which are not statuses
 List<FileSystemEntity> filter(List<FileSystemEntity> statues) {
   return statues.where((status) {
-    // return status.path.endsWith('.mp4') || status.path.endsWith('.jpg');
-    return status.path.endsWith('.jpg');
+    return status.path.endsWith('.mp4') || status.path.endsWith('.jpg');
   }).toList();
 }
