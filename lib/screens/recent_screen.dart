@@ -29,15 +29,15 @@ class _RecentScreenState extends State<RecentScreen> {
       future: _statuses,
       builder: (context, snapshot) {
         if(snapshot.connectionState == ConnectionState.done ) {
-            log("Total Images " + snapshot.data!.length.toString());
             return GridView.builder(
               itemCount: snapshot.data!.length,
               gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,crossAxisSpacing: 10,mainAxisSpacing: 5),
-              
               itemBuilder: (context, index) {
                 final String statusPath  = snapshot.data![index].path;
                 if(statusPath.endsWith('.jpg')) {
                   return ImageTile(imagePath: statusPath);
+                } else {
+                  return VideoTile(videoPath: statusPath);
                 }
               }
             );

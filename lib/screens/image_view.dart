@@ -19,6 +19,8 @@ class ImageView extends StatelessWidget {
         ),
       ),
       body: PhotoView(
+        minScale: PhotoViewComputedScale.contained * 0.6,
+        maxScale: PhotoViewComputedScale.contained * 2.5,
         imageProvider: FileImage(
           File(imagePath)
         ),
