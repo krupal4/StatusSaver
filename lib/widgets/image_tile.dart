@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:status_saver/colors.dart';
 import 'package:status_saver/common.dart';
 import 'package:status_saver/screens/image_view.dart';
+import 'package:status_saver/styles.dart';
 
 class ImageTile extends StatelessWidget {
   const ImageTile({
@@ -14,10 +16,10 @@ class ImageTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8),
+      padding: edgeinsetsAll,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: Colors.green
+        borderRadius: statusBorderRadius,
+        color: imageStatusBorderColor
       ),
       child: GestureDetector(
         onTap: () {

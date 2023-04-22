@@ -14,5 +14,9 @@
     "savedStatuses": "Saved",
     "@savedStatuses": {
         "description": "Saved statuses"
+    },
+    "statusSavedMessage": "Status saved",
+    "@statusSavedMessage": {
+        "description": "Status saved acknowledgement message"
     }
 }

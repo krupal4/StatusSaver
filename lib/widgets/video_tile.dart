@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:status_saver/colors.dart';
 import 'package:status_saver/common.dart';
 import 'package:status_saver/screens/video_view.dart';
 import 'package:status_saver/services/get_video_thumbnail.dart';
+import 'package:status_saver/styles.dart';
 
 class VideoTile extends StatelessWidget {
   final String videoPath;
@@ -15,10 +17,10 @@ class VideoTile extends StatelessWidget {
       builder: ((_, snapshot) {
         if(snapshot.connectionState == ConnectionState.done ) {
           return Container(
-            padding: const EdgeInsets.all(8),
+            padding: edgeinsetsAll,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.amber
+              borderRadius: statusBorderRadius,
+              color: videoStatusBorderColor
             ),
             child: GestureDetector(
               onTap: () => Navigator.of(context).push(
@@ -38,7 +40,7 @@ class VideoTile extends StatelessWidget {
                       child:  Icon(
                         Icons.play_circle_fill_rounded, 
                         size: 55,color: 
-                        Colors.grey,
+                        videoPlayIconColor,
                         )
                     )
                   )

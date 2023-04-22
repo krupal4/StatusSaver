@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: Text(AppLocalizations.of(context)?.appTitle ?? "WhatsApp Status Saver"),
           bottom: TabBar(
+            splashBorderRadius: BorderRadius.circular(10),
             tabs: [
               MyTab(tabName: AppLocalizations.of(context)?.recentStatuses ?? "Recent"),
               MyTab(tabName: AppLocalizations.of(context)?.savedStatuses ?? "Saved"),
@@ -44,7 +45,7 @@ class MyTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Text(tabName),
+      child: Text(tabName, style: const TextStyle(fontSize: 20))
     );
   }
 }

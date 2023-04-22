@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:photo_view/photo_view.dart';
 import 'package:status_saver/common.dart';
+import 'package:status_saver/widgets/common_widgets.dart';
 
 class ImageView extends StatelessWidget {
   final String imagePath;
@@ -12,11 +13,10 @@ class ImageView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded),
-          onPressed: () {
-            Navigator.of(context).pop();
-          }
+          onPressed: () => pop(context), 
+          icon: leadingBackIcon  
         ),
+        actions: statusActions(context: context, statusPath: imagePath),
       ),
       body: PhotoView(
         minScale: PhotoViewComputedScale.contained * 0.6,

@@ -123,6 +123,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_native_api:
+    dependency: "direct main"
+    description:
+      name: flutter_native_api
+      sha256: "33355ec913129795305b86bc3a62621cea487140dc29d34ffbc6200f0cb059bd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:
@@ -149,6 +157,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.15.2"
+  image_gallery_saver:
+    dependency: "direct main"
+    description:
+      name: image_gallery_saver
+      sha256: be812580c7a320d3bf583af89cac6b376f170d48000aca75215a73285a3223a0
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.7.1"
   intl:
     dependency: "direct main"
     description:

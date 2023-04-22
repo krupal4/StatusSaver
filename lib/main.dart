@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
           )
       ),
       tabBarTheme: const TabBarTheme(
+        labelStyle: TextStyle(fontSize: 29),
         indicator: UnderlineTabIndicator(
           insets: EdgeInsets.symmetric(horizontal: 13),
           borderSide: BorderSide(color: darkIndicatorColor, width: 2.5)

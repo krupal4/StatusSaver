@@ -7,3 +7,7 @@ void log(String message) {
   debugPrint(message);
   debugPrint("---------------------------------------------");
 }
+
+void pop(BuildContext context) {
+  return Navigator.of(context).pop();
+}
