@@ -5,5 +5,6 @@
     "savedStatuses": "સચવાયેલ",
     "statusSavedMessage": "સ્ટેટસ સચવાયુ",
     "noSavedStatusesMessage": "કોઈ પણ સાચવેલા સ્ટેટસ નથી",
-    "noWhatsappFoundMessage": "તમારા મોબાઈલમાં વોટ્સએપ નથી"
+    "noWhatsappFoundMessage": "તમારા મોબાઈલમાં વોટ્સએપ નથી",
+    "appLanguageLabel": "એપ ભાષાઓ"
 }

@@ -5,5 +5,6 @@
     "savedStatuses": "सेव हो गया",
     "statusSavedMessage": "स्टेटस सेव हो गया",
     "noSavedStatusesMessage": "एक भी सेव किया हुआ स्टेटस नहीं है",
-    "noWhatsappFoundMessage": "आप के मोबाइल में व्हाट्सएप नहीं है"
+    "noWhatsappFoundMessage": "आप के मोबाइल में व्हाट्सएप नहीं है",
+    "appLanguageLabel": "ऐप की भाषा"
 }

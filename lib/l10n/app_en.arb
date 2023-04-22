@@ -26,5 +26,9 @@
     "noWhatsappFoundMessage": "Whatsapp does not exists on your mobile",
     "@noWhatsappFoundMessage": {
         "description": "No whatsapp in mobile found message"
+    },
+    "appLanguageLabel": "App Language",
+    "@appLanguageLabel": {
+        "description": "Choose App Language"
     }
 }

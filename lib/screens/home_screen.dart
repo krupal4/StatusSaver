@@ -1,10 +1,7 @@
-import 'dart:io';
-
-import 'package:status_saver/constants.dart';
+import 'package:status_saver/widgets/drawer_item.dart';
 import 'package:status_saver/screens/recent_screen.dart';
 import 'package:status_saver/screens/saved_screen.dart';
-
-import '../common.dart';
+import 'package:status_saver/common.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,6 +26,23 @@ class _HomeScreenState extends State<HomeScreen> {
               MyTab(tabName: AppLocalizations.of(context)?.savedStatuses ?? "Saved"),
           ]),
           ),
+        drawer:Drawer(
+          child: Column(
+            children: [
+              const DrawerHeader(
+                child: Text('Hello')
+                ),
+              DrawerItem(
+                child: Row(
+                  children: [
+                    const Icon(Icons.language_sharp),
+                    Text(AppLocalizations.of(context)?.appLanguageLabel ?? "App Language"),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
         body: const TabBarView(
           children: [
               RecentScreen(),
