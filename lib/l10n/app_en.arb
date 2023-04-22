@@ -18,5 +18,13 @@
     "statusSavedMessage": "Status saved",
     "@statusSavedMessage": {
         "description": "Status saved acknowledgement message"
+    },
+    "noSavedStatusesMessage": "No saved statuses",
+    "@noSavedStatusesMessage": {
+        "description": "No saved statuses message"
+    },
+    "noWhatsappFoundMessage": "Whatsapp does not exists on your mobile",
+    "@noWhatsappFoundMessage": {
+        "description": "No whatsapp in mobile found message"
     }
 }

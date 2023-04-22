@@ -23,9 +23,13 @@ class _RecentScreenState extends State<RecentScreen> {
   @override
   void initState() {
     super.initState();
-    _recentStatuses = getStatuses(
-      directoryPaths : _directoryPaths);
-    _directoryExists = isDirectoryExists(directoriesPath:_directoryPaths);
+    _directoryExists = isDirectoryExists(directoriesPath:_directoryPaths).then((isExists) {
+      if(isExists) {
+        _recentStatuses = getStatuses(directoryPaths : _directoryPaths); 
+        return true;
+      }
+      return false;
+    });
   }
 
   @override

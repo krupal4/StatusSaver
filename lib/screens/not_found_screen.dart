@@ -7,7 +7,7 @@ class NotFoundScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(message) // TODO: LOCALIZE
+      child: Text(message, style: const TextStyle(fontSize: 20)) 
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:status_saver/common.dart';
 import 'package:status_saver/constants.dart';
 import 'package:status_saver/services/get_storage_permissions.dart';
 
@@ -9,15 +10,17 @@ Future<List<FileSystemEntity>> getStatuses({required List<String> directoryPaths
   if(await getStoragePermissions() == true) {
     List<FileSystemEntity> statuses = [];
 
-    for(String directoryPath in directoryPaths) { 
-      Directory directory = Directory(directoryPath);
-      statuses.addAll(directory.listSync()); 
-      // TODO: handle stream of list using directory.list()
+    try {
+      for(String directoryPath in directoryPaths) { 
+        Directory directory = Directory(directoryPath);
+        statuses.addAll(directory.listSync()); 
+        // TODO: handle stream of list using directory.list()
+      }
+    } catch (e) {
+      log(e.toString());
     }
-
     return filter(statuses);
   }
-
   // please give permissions
   return [];
 }

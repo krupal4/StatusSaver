@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:status_saver/constants.dart';
 import 'package:status_saver/services/get_statuses.dart';
 import 'package:status_saver/common.dart';
 import 'package:status_saver/services/is_directory_exists.dart';
@@ -17,14 +18,19 @@ class _SavedScreenState extends State<SavedScreen> {
 
   late Future<bool> _directoryExists;
   late Future<List<FileSystemEntity>> _savedStatuses;
-  final List<String> _directoryPaths = [];
+  final List<String> _directoryPaths = [ savedStatusesDirectory ];
 
   @override
   void initState() {
     super.initState();
-    _savedStatuses = getStatuses(
-      directoryPaths : _directoryPaths);
-    _directoryExists = isDirectoryExists(directoriesPath:_directoryPaths);
+    _directoryExists = isDirectoryExists(directoriesPath:_directoryPaths)
+    .then((isExists) {
+      if(isExists) {
+        _savedStatuses = getStatuses(directoryPaths: _directoryPaths);
+        return true;
+      }
+      return false;
+    });
   }
 
   @override
@@ -36,10 +42,10 @@ class _SavedScreenState extends State<SavedScreen> {
           if(snapshot.data!) {
             return StatusesList(statuses: _savedStatuses);
           } else {
-            return const NotFoundScreen(message: "Saved statuses Not found");
+            return NotFoundScreen(message: AppLocalizations.of(context)?.noSavedStatusesMessage ?? "No saved statuses");
           }
         } else {
-          // TODO return effective progress bar
+          // TODO: return effective progress bar
           return const Center(child: CircularProgressIndicator());
         }
       }
