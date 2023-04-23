@@ -19,10 +19,10 @@ Future<bool> getStoragePermissions() async {
   } else {
     // request for permission
     if (androidInfo.version.sdkInt >= 33) {
-      Permission.manageExternalStorage.request();
+      await Permission.manageExternalStorage.request();
       return await Permission.manageExternalStorage.status.isGranted;
     } else {
-      Permission.storage.request();
+      await Permission.storage.request();
       return await Permission.storage.status.isGranted;
     }
   }

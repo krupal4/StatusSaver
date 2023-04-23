@@ -5,7 +5,6 @@ import 'package:status_saver/common.dart';
 import 'package:status_saver/screens/video_view.dart';
 import 'package:status_saver/services/get_video_thumbnail.dart';
 import 'package:status_saver/styles.dart';
-
 class VideoTile extends StatelessWidget {
   final String videoPath;
   const VideoTile({super.key, required this.videoPath});

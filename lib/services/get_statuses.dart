@@ -4,7 +4,7 @@ import 'package:status_saver/common.dart';
 import 'package:status_saver/constants.dart';
 import 'package:status_saver/services/get_storage_permissions.dart';
 
-Future<List<FileSystemEntity>> getStatuses({required List<String> directoryPaths}) async {
+Future<List<String>> getStatuses({required List<String> directoryPaths}) async {
 
   // check for storage permissions
   if(await getStoragePermissions() == true) {
@@ -26,9 +26,11 @@ Future<List<FileSystemEntity>> getStatuses({required List<String> directoryPaths
 }
 
 /// remove unnecessary files which are not statuses
-List<FileSystemEntity> filter(List<FileSystemEntity> statuses) {
+List<String> filter(List<FileSystemEntity> statuses) {
   return statuses.where((status) {
     // TODO: datewise sorting
     return status.path.endsWith(MP4) || status.path.endsWith(JPG);
-  }).toList();
+  })
+  .map((status) => status.path)
+  .toList();
 }

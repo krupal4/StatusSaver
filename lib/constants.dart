@@ -6,3 +6,6 @@ const String savedStatusesDirectory= "/storage/emulated/0/Download/Saved Statuse
 const String JPG = ".jpg";
 const String MP4 = ".mp4";
 const String PNG = ".png";
+
+final List<String> recentDirectoryPaths = [whatsAppStatusesLocalPath,whatsAppBusinessStatusesLocalPath];
+final List<String> savedDirectoryPaths = [ savedStatusesDirectory ];

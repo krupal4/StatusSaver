@@ -32,27 +32,6 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  ThemeData darkThemeData() {
-    return ThemeData.dark().copyWith(
-      appBarTheme: const AppBarTheme(
-        color: darkPrimarySwatch,
-        titleTextStyle: TextStyle(
-          color: darkTextColor,
-          fontSize: 22
-          )
-      ),
-      tabBarTheme: const TabBarTheme(
-        labelStyle: TextStyle(fontSize: 29),
-        indicator: UnderlineTabIndicator(
-          insets: EdgeInsets.symmetric(horizontal: 13),
-          borderSide: BorderSide(color: darkIndicatorColor, width: 2.5)
-        ),
-        labelColor: darkLabelColor,
-        indicatorColor: darkIndicatorColor
-      )
-    );
-  }
-
   ThemeData themeData() {
     return ThemeData(
       primarySwatch: primarySwatch,
@@ -73,4 +52,25 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+
+  ThemeData darkThemeData() {
+    return ThemeData.dark().copyWith(
+      appBarTheme: const AppBarTheme(
+        color: darkPrimarySwatch,
+        titleTextStyle: TextStyle(
+          color: darkTextColor,
+          fontSize: 22
+          )
+      ),
+      tabBarTheme: const TabBarTheme(
+        indicator: UnderlineTabIndicator(
+          insets: EdgeInsets.symmetric(horizontal: 13),
+          borderSide: BorderSide(color: darkIndicatorColor, width: 2.5)
+        ),
+        labelColor: darkLabelColor,
+        indicatorColor: darkIndicatorColor
+      )
+    );
+  }
 }
+
