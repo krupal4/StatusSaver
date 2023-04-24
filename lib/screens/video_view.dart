@@ -41,17 +41,19 @@ class _VideoViewState extends State<VideoView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: leadingBackIcon,
-          onPressed: () => pop(context),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        appBar: AppBar(
+          leading: IconButton(
+            icon: leadingBackIcon,
+            onPressed: () => pop(context),
+          ),
+          actions: statusActions(context: context, statusPath: widget.videoPath),
         ),
-        actions: statusActions(context: context, statusPath: widget.videoPath),
-      ),
-      body: Chewie(
-        controller: _chewieController!,
+        body: Chewie(
+          controller: _chewieController!,
+        ),
       ),
     );
   }

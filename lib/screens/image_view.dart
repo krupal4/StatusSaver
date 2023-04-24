@@ -10,21 +10,23 @@ class ImageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => pop(context), 
-          icon: leadingBackIcon  
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () => pop(context), 
+            icon: leadingBackIcon  
+          ),
+          actions: statusActions(context: context, statusPath: imagePath),
         ),
-        actions: statusActions(context: context, statusPath: imagePath),
+        body: PhotoView(
+          minScale: PhotoViewComputedScale.contained * 0.6,
+          maxScale: PhotoViewComputedScale.contained * 2.5,
+          imageProvider: FileImage(
+            File(imagePath)
+          ),
+        )
       ),
-      body: PhotoView(
-        minScale: PhotoViewComputedScale.contained * 0.6,
-        maxScale: PhotoViewComputedScale.contained * 2.5,
-        imageProvider: FileImage(
-          File(imagePath)
-        ),
-      )
     );
   }
 }
