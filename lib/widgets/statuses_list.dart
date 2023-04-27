@@ -6,17 +6,17 @@ import 'package:status_saver/widgets/video_tile.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class StatusesList extends StatelessWidget {
+  final Future<List<String>> Function() getStatuses;
   const StatusesList({
     super.key,
-    required Future<List<String>> statuses,
-  }) : _statuses = statuses;
+    required this.getStatuses,
+  });
 
-  final Future<List<String>> _statuses;
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<String>>(
-      future: _statuses,
+      future: getStatuses(),
       builder: (context, snapshot) {
         if(snapshot.connectionState == ConnectionState.done ) {
             return StaggeredGridView.countBuilder(

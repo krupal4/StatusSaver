@@ -1,29 +1,29 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:status_saver/common.dart';
 
 Future<bool> getStoragePermissions() async {
-  bool storage = true;
-  bool manageExternalStorage = true;
 
-  // Only check for storage < Android 13
   DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
   AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+  late final Map<Permission,PermissionStatus> permissionStatuses;
+  bool isStoragePermitted = true;
+
   if (androidInfo.version.sdkInt >= 33) {
-    manageExternalStorage = await Permission.manageExternalStorage.status.isGranted;
+    permissionStatuses = await [
+      Permission.manageExternalStorage
+    ].request();
   } else {
-    storage = await Permission.storage.status.isGranted;
+    permissionStatuses = await [
+      Permission.storage
+    ].request();
   }
 
-  if (storage && manageExternalStorage) {
-    return true;
-  } else {
-    // request for permission
-    if (androidInfo.version.sdkInt >= 33) {
-      await Permission.manageExternalStorage.request();
-      return await Permission.manageExternalStorage.status.isGranted;
-    } else {
-      await Permission.storage.request();
-      return await Permission.storage.status.isGranted;
+  permissionStatuses.forEach((_, permissionStatus) {
+    log(permissionStatus.toString());
+    if(permissionStatus != PermissionStatus.granted) {
+      isStoragePermitted = false;
     }
-  }
+  });
+  return isStoragePermitted;
 }

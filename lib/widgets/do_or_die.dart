@@ -16,13 +16,12 @@ class DoOrDie extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: directoryExists,
-      builder: (context,snapshot) {
+      builder: (_,snapshot) {
         if(snapshot.connectionState == ConnectionState.done) {
-          if(snapshot.data!) {
+          if(snapshot.data! == true) {
             return onExists();
-          } else {
-            return NotFoundScreen(message: notExistsMessage);
           }
+          return NotFoundScreen(message: notExistsMessage);
         } else {
           // TODO: return effective progress bar
           return const Center(child: CircularProgressIndicator());

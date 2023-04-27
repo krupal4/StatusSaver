@@ -2,35 +2,28 @@ import 'dart:io';
 
 import 'package:status_saver/common.dart';
 import 'package:status_saver/constants.dart';
-import 'package:status_saver/services/get_storage_permissions.dart';
 
 Future<List<String>> getStatuses({required List<String> directoryPaths}) async {
 
-  // check for storage permissions
-  if(await getStoragePermissions() == true) {
-    List<FileSystemEntity> statuses = [];
-
-    try {
-      for(String directoryPath in directoryPaths) { 
-        Directory directory = Directory(directoryPath);
-        statuses.addAll(directory.listSync()); 
-        // TODO: handle stream of list using directory.list()
-      }
-    } catch (e) {
-      log(e.toString());
+  List<String> statuses = [];
+  try {
+    for(String directoryPath in directoryPaths) { 
+      Directory directory = Directory(directoryPath);
+      statuses.addAll(directory.listSync().map((file) => file.path)); 
+      // TODO: handle stream of list using directory.list()
     }
-    return filter(statuses);
+  log(statuses.toString());
+  } catch (e) {
+    log(e.toString());
   }
-  // please give permissions
-  return [];
+  return filter(statuses);
 }
 
 /// remove unnecessary files which are not statuses
-List<String> filter(List<FileSystemEntity> statuses) {
+List<String> filter(List<String> statuses) {
   return statuses.where((status) {
     // TODO: datewise sorting
-    return status.path.endsWith(MP4) || status.path.endsWith(JPG);
+    return status.endsWith(MP4) || status.endsWith(JPG);
   })
-  .map((status) => status.path)
   .toList();
 }
