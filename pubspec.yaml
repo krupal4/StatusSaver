@@ -46,6 +46,7 @@ dependencies:
   chewie: ^1.0.0
   video_player: ^2.6.1
   share_plus: ^6.3.2
+  url_launcher: ^6.1.10
 
 dev_dependencies:
   flutter_test:

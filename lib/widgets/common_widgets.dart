@@ -24,7 +24,7 @@ List<Widget> statusActions({required BuildContext context, required String statu
               SnackBar(content: Text(AppLocalizations.of(context)?.statusSavedMessage ?? "Status successfully saved")));
           });
         } catch (e) {
-          log(e.toString());
+          log("save ::: " + e.toString());
         }
       }, 
       icon: const Icon(Icons.file_download_rounded)
@@ -34,6 +34,7 @@ List<Widget> statusActions({required BuildContext context, required String statu
   actions.addAll([
     IconButton(
       onPressed: (){
+        // TODO use depricated method for share
         Share.shareXFiles([XFile(statusPath)],subject: 'WhatsappSubject');
       }, 
       icon: const Icon(Icons.share_rounded)

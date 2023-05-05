@@ -23,7 +23,7 @@ Future<List<String>> getStatuses({required List<String> directoryPaths}) async {
 List<String> filter(List<String> statuses) {
   return statuses.where((status) {
     // TODO: datewise sorting
-    return status.endsWith(MP4) || status.endsWith(JPG);
+    return status.endsWith(mp4) || status.endsWith(jpg);
   })
   .toList();
 }

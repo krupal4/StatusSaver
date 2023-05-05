@@ -19,11 +19,10 @@ class ImageTile extends StatelessWidget {
       padding: edgeinsetsAll,
       decoration: BoxDecoration(
         borderRadius: statusBorderRadius,
-        color: imageStatusBorderColor
+        color: statusBorderColor,
       ),
       child: GestureDetector(
         onTap: () {
-          log('tapped');
           Navigator.of(context).push(MaterialPageRoute(builder: (context) {
             return ImageView(imagePath: imagePath,);
           }));

@@ -18,36 +18,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  late Future<bool> _recentDirectoryExists;
-  late Future<bool> _savedDirectoryExists;
-
-  @override
-  void initState() {
-    super.initState();
-/*
-    // for recent statuses
-    _recentDirectoryExists = isDirectoryExists(directoriesPath:recentDirectoryPaths)
-    .then((isExists) {
-      if(isExists) {
-        _recentStatuses = getStatuses(directoryPaths : recentDirectoryPaths); 
-        // for saved statuses
-        _savedDirectoryExists = isDirectoryExists(directoriesPath:savedDirectoryPaths)
-        .then((isExists) {
-          if(isExists) {
-            _savedStatuses = getStatuses(directoryPaths: savedDirectoryPaths);
-            return true;
-          }
-          return false;
-        });
-        return true;
-      }
-      return false;
-    });
-*/
-
-  _recentDirectoryExists = isDirectoryExists(directoriesPath: recentDirectoryPaths);
-  _savedDirectoryExists = isDirectoryExists(directoriesPath: savedDirectoryPaths);
-  }
+  Future<List<String>>? recentStatuses;
+  Future<List<String>>? savedStatuses;
 
   @override
   Widget build(BuildContext context) {
@@ -92,14 +64,14 @@ class _HomeScreenState extends State<HomeScreen> {
             body: TabBarView(
               children: [
                   DoOrDie(
-                    directoryExists: _recentDirectoryExists,
+                    directoryExists: () => isDirectoryExists(directoriesPath: recentDirectoryPaths),
                     notExistsMessage: AppLocalizations.of(context)?.noWhatsappFoundMessage ?? "Whatsapp or W4B Not found",
-                    onExists:() => StatusesList(getStatuses: () => getStatuses(directoryPaths: recentDirectoryPaths)),
+                    onExists:() => StatusesList(statuses: recentStatuses,getStatuses: () => getStatuses(directoryPaths: recentDirectoryPaths),tabName: "Recent"),
                   ),
                   DoOrDie(
-                    directoryExists: _savedDirectoryExists,
+                    directoryExists: () => isDirectoryExists(directoriesPath: [savedStatusesDirectory]),
                     notExistsMessage: AppLocalizations.of(context)?.noSavedStatusesMessage ?? "No saved statuses",
-                    onExists:() => StatusesList(getStatuses: () => getStatuses(directoryPaths: savedDirectoryPaths)),
+                    onExists:() => StatusesList(statuses: savedStatuses,getStatuses: () => getStatuses(directoryPaths: [savedStatusesDirectory])),
                   )
                 ],
             ),

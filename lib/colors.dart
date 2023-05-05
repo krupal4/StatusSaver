@@ -20,8 +20,6 @@ const labelColor = Color(0xFFFFFFFF);
 const indicatorColor = Color(0xFFFFFFFF);
 const textColor = Color(0xFFFFFFFF);
 
-const MaterialColor videoStatusBorderColor = Colors.amber;
-const MaterialColor imageStatusBorderColor = Colors.purple;
 const MaterialColor videoPlayIconColor = Colors.grey;
 
 ///
@@ -32,3 +30,7 @@ const darkPrimarySwatch = Color(0xFF1F2C34);
 const darkLabelColor = Color(0xFF04A683);
 const darkIndicatorColor =  Color(0xFF04A683);
 const darkTextColor = Color(0xFF83939D);
+
+///
+
+final Color statusBorderColor = Colors.green.shade400;

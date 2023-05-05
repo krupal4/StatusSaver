@@ -19,7 +19,7 @@ class VideoTile extends StatelessWidget {
             padding: edgeinsetsAll,
             decoration: BoxDecoration(
               borderRadius: statusBorderRadius,
-              color: videoStatusBorderColor
+              color: statusBorderColor,
             ),
             child: GestureDetector(
               onTap: () => Navigator.of(context).push(

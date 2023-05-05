@@ -2,7 +2,7 @@ import 'package:status_saver/common.dart';
 import 'package:status_saver/screens/not_found_screen.dart';
 
 class DoOrDie extends StatelessWidget {
-  final Future<bool> directoryExists;
+  final Future<bool> Function() directoryExists;
   final Widget Function() onExists;
   final String notExistsMessage;
   const DoOrDie({
@@ -15,10 +15,10 @@ class DoOrDie extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: directoryExists,
+      future: directoryExists(),
       builder: (_,snapshot) {
         if(snapshot.connectionState == ConnectionState.done) {
-          if(snapshot.data! == true) {
+          if(snapshot.data!) {
             return onExists();
           }
           return NotFoundScreen(message: notExistsMessage);
