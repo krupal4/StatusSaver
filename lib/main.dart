@@ -26,7 +26,14 @@ class MyApp extends StatelessWidget {
         Locale("gu"), // Gujarati
       ],
       theme: ThemeData(
-        useMaterial3: true
+        useMaterial3: true,
+        brightness: Brightness.light,
+        colorSchemeSeed: Colors.green[700],
+      ),
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        brightness: Brightness.dark,
+        colorSchemeSeed: Colors.green[700],
       ),
       home: const HomeScreen(),
     );

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:chewie/chewie.dart';
 import 'package:status_saver/common.dart';
 import 'package:video_player/video_player.dart';
-import 'package:status_saver/widgets/common_widgets.dart';
 
 class VideoView extends StatefulWidget {
   final String videoPath;
@@ -41,20 +40,8 @@ class _VideoViewState extends State<VideoView> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.black,
-        appBar: AppBar(
-          leading: IconButton(
-            icon: leadingBackIcon,
-            onPressed: () => pop(context),
-          ),
-          actions: statusActions(context: context, statusPath: widget.videoPath),
-        ),
-        body: Chewie(
-          controller: _chewieController!,
-        ),
-      ),
+    return Chewie(
+      controller: _chewieController!,
     );
   }
 }

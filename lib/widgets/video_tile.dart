@@ -4,7 +4,6 @@ import 'package:status_saver/colors.dart';
 import 'package:status_saver/common.dart';
 import 'package:status_saver/screens/video_view.dart';
 import 'package:status_saver/services/get_video_thumbnail.dart';
-import 'package:status_saver/styles.dart';
 class VideoTile extends StatelessWidget {
   final String videoPath;
   const VideoTile({super.key, required this.videoPath});
@@ -15,17 +14,15 @@ class VideoTile extends StatelessWidget {
       future: getVideoThumbnail(videoPath),
       builder: ((_, snapshot) {
         if(snapshot.connectionState == ConnectionState.done ) {
-          return Container(
-            padding: edgeinsetsAll,
-            decoration: BoxDecoration(
-              borderRadius: statusBorderRadius,
-              color: statusBorderColor,
-            ),
-            child: GestureDetector(
+          return Card(
+            elevation: 5,
+            clipBehavior: Clip.hardEdge,
+            child: InkWell(
+              splashColor: Colors.green.withAlpha(30),
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (_)=>VideoView(videoPath: videoPath)
-                )),
+              ),),
               child: Stack(
                 children: [
                   Image.file(File(snapshot.data!)),

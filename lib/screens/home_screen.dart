@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Scaffold(
             appBar: AppBar(
               title: Text(AppLocalizations.of(context)?.appTitle ?? "WhatsApp Status Saver"),
-              elevation: 0,
+              elevation: 4,
               centerTitle: true,
               bottom: TabBar(
                 splashBorderRadius: BorderRadius.circular(10),
