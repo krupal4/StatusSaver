@@ -6,15 +6,16 @@ import 'package:status_saver/constants.dart';
 Future<List<String>> getStatuses({required List<String> directoryPaths}) async {
 
   List<String> statuses = [];
-  try {
-    for(String directoryPath in directoryPaths) { 
-      Directory directory = Directory(directoryPath);
-      statuses.addAll(directory.listSync().map((file) => file.path)); 
-      // TODO: handle stream of list using directory.list()
+  for(String directoryPath in directoryPaths) { 
+        try {
+        Directory directory = Directory(directoryPath);
+        statuses.addAll(directory.listSync().map((file) => file.path)); 
+        // TODO: handle stream of list using directory.list()
+    } on PathNotFoundException catch (_) {
+      // log(_.toString());
+    } catch (e) {
+      log(e.toString());
     }
-  log(statuses.toString());
-  } catch (e) {
-    log(e.toString());
   }
   return filter(statuses);
 }

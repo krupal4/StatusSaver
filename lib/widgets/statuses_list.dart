@@ -39,7 +39,7 @@ class _StatusesListState extends State<StatusesList> {
             return const NoStatusesFoundScreen();
           }
             return StaggeredGridView.countBuilder(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
               crossAxisCount: 2,
               mainAxisSpacing: 5,
               crossAxisSpacing: 5,

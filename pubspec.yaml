@@ -47,6 +47,8 @@ dependencies:
   video_player: ^2.6.1
   share_plus: ^6.3.2
   url_launcher: ^6.1.10
+  device_apps: ^2.2.0
+  font_awesome_flutter: ^10.4.0
 
 dev_dependencies:
   flutter_test:
@@ -74,7 +76,6 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   # assets:
-  #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
