@@ -3,8 +3,8 @@ import 'package:status_saver/common.dart';
 import 'package:status_saver/constants.dart';
 import 'package:status_saver/services/launch_app.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-class NoStatusesFoundScreen extends StatelessWidget {
-  const NoStatusesFoundScreen({super.key});
+class NoRecentStatusesFoundScreen extends StatelessWidget {
+  const NoRecentStatusesFoundScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

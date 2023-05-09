@@ -1,5 +1,5 @@
 import 'package:status_saver/constants.dart';
-import 'package:status_saver/services/get_statuses.dart';
+import 'package:status_saver/models/tab_type.dart';
 import 'package:status_saver/services/get_storage_permissions.dart';
 import 'package:status_saver/services/is_directory_exists.dart';
 import 'package:status_saver/widgets/drawer_item.dart';
@@ -18,8 +18,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  Future<List<String>>? recentStatuses;
-  Future<List<String>>? savedStatuses;
+  List<String>? recentStatuses;
+  List<String>? savedStatuses;
 
   @override
   Widget build(BuildContext context) {
@@ -65,14 +65,12 @@ class _HomeScreenState extends State<HomeScreen> {
             body: TabBarView(
               children: [
                   DoOrDie(
-                    directoryExists: () => isDirectoryExists(directoriesPath: recentDirectoryPaths),
-                    notExistsMessage: AppLocalizations.of(context)?.noWhatsappFoundMessage ?? "Whatsapp or W4B Not found",
-                    onExists:() => StatusesList(statuses: recentStatuses,getStatuses: () => getStatuses(directoryPaths: recentDirectoryPaths),tabName: "Recent"),
+                    tabType: TabType.recent,
+                    onExists:() => StatusesList(statuses: recentStatuses,tabType: TabType.recent),
                   ),
                   DoOrDie(
-                    directoryExists: () => isDirectoryExists(directoriesPath: [savedStatusesDirectory]),
-                    notExistsMessage: AppLocalizations.of(context)?.noSavedStatusesMessage ?? "No saved statuses",
-                    onExists:() => StatusesList(statuses: savedStatuses,getStatuses: () => getStatuses(directoryPaths: [savedStatusesDirectory])),
+                    tabType: TabType.saved,
+                    onExists:() => StatusesList(statuses: savedStatuses,tabType: TabType.saved),
                   )
                 ],
             ),

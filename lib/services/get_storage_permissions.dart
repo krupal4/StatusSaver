@@ -11,8 +11,7 @@ Future<bool> getStoragePermissions() async {
 
   if (androidInfo.version.sdkInt >= 33) {
     permissionStatuses = await [
-      Permission.photos,
-      Permission.videos
+      Permission.manageExternalStorage
     ].request();
   } else {
     permissionStatuses = await [

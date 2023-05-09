@@ -49,6 +49,7 @@ dependencies:
   url_launcher: ^6.1.10
   device_apps: ^2.2.0
   font_awesome_flutter: ^10.4.0
+  fluttertoast: ^8.2.1
 
 dev_dependencies:
   flutter_test:

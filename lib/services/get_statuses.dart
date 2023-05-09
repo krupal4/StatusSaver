@@ -2,8 +2,11 @@ import 'dart:io';
 
 import 'package:status_saver/common.dart';
 import 'package:status_saver/constants.dart';
+import 'package:status_saver/models/tab_type.dart';
 
-Future<List<String>> getStatuses({required List<String> directoryPaths}) async {
+List<String> getStatuses({required TabType tabType}) {
+
+  final List<String> directoryPaths = tabType == TabType.recent ? recentDirectoryPaths: const [savedStatusesDirectory];
 
   List<String> statuses = [];
   for(String directoryPath in directoryPaths) { 
