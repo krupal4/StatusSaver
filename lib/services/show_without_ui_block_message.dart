@@ -6,10 +6,10 @@ void showMessageWithoutUiBlock({required String message}) {
   Fluttertoast.showToast(
       msg: message,
       toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
+      gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
-      backgroundColor: Colors.white,
-      textColor: Colors.white,
+      backgroundColor: Colors.greenAccent.shade200,
+      textColor: Colors.black,
       fontSize: 16.0
     );
 }
