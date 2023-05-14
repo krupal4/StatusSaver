@@ -2,6 +2,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:status_saver/common.dart';
 import 'package:status_saver/l10n/l10n.dart';
+import 'package:status_saver/provider/theme_provider.dart';
 import 'package:status_saver/screens/home_screen.dart';
 import 'package:status_saver/provider/locale_provider.dart';
 
@@ -15,10 +16,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => LocaleProvider()..initialize(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<LocaleProvider>(create: (context) => LocaleProvider()..initialize()),
+        ChangeNotifierProvider<ThemeModeProvider>(create: (context) => ThemeModeProvider()..initialize())
+      ],
       builder: (context,child) {
         final localeProvider = Provider.of<LocaleProvider>(context);
+        final themeModeProvider = Provider.of<ThemeModeProvider>(context);
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Whatsapp Status Saver',
@@ -30,6 +35,7 @@ class MyApp extends StatelessWidget {
           ],
           locale: localeProvider.locale,
           supportedLocales: AppLocalizations.supportedLocales,
+          themeMode: themeModeProvider.themeMode,
           theme: ThemeData(
             useMaterial3: true,
             brightness: Brightness.light,

@@ -5,6 +5,7 @@ import 'package:status_saver/constants.dart';
 import 'package:status_saver/l10n/l10n.dart';
 import 'package:status_saver/models/tab_type.dart';
 import 'package:status_saver/provider/locale_provider.dart';
+import 'package:status_saver/provider/theme_provider.dart';
 import 'package:status_saver/screens/give_permissions_screen.dart';
 import 'package:status_saver/services/get_storage_permissions.dart';
 import 'package:status_saver/widgets/do_or_die.dart';
@@ -90,6 +91,14 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
           ListTile(
+            title: const Text("App Theme Mode"), // TODO: localize
+            leading: const Icon(Icons.dark_mode_outlined),
+            onTap: () {
+              pop(context);
+              _showThemeModeSelector(context);
+            },
+          ),
+          ListTile(
             title:  const Text("About"), // TODO: localize
             leading: const Icon(Icons.info),
             onTap: () {
@@ -111,6 +120,49 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Future<dynamic> _showThemeModeSelector(BuildContext context) {
+    return showDialog(
+      context: context, 
+      builder: (context) {
+        final themeModeProvider = Provider.of<ThemeModeProvider>(context, listen: false);
+        return AlertDialog(
+          content: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.22,// TODO: auto height
+            width: MediaQuery.of(context).size.width * 0.7,
+            child: Scrollbar(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 12,),
+                child: ListView.builder(
+                  itemCount: MyThemes.themeModeTypes.length,
+                  itemBuilder: (context,index) {
+                    return ListTile(
+                      title: Text(MyThemes.themeModeTypes[index]),
+                      leading: MyThemes.themeModeIcons[index],
+                      trailing: themeModeProvider.themeMode == MyThemes.themeModes[index] ? const Icon(Icons.check): null,
+                      onTap: () {
+                        setState((){
+                          themeModeProvider.setThemeMode(MyThemes.themeModes[index]);
+                        });
+                      },
+                    );
+                  },
+                ),
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                pop(context);
+              }, 
+              child: const Text("CLOSE") // TODO: localize
+            )
+          ],
+        );
+      }
+    );
+  }
+
   void _showLanguageChooser(BuildContext context) {
     final localeProvider = Provider.of<LocaleProvider>(context, listen: false);
     String tempSelectedLanguageCode = localeProvider.locale?.languageCode ?? systemLanguageCode;
@@ -126,8 +178,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: const TextStyle(fontSize: 18)
               ),
               content: SizedBox(
-                height: double.maxFinite,
-                width: MediaQuery.of(context).size.width * 0.7,
+                height: double.maxFinite, // TODO: auto height
+                width: MediaQuery.of(context).size.width * 0.85,
                 child: Scrollbar(
                   child: Padding(
                     padding: const EdgeInsets.only(right: 12,),

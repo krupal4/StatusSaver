@@ -19,3 +19,4 @@ const languageCodeKey = "languageCode";
 const defaultLanguageCode = "en";
 const systemLanguageCode = "system";
 const emptyString = '';
+const themeModeTypeKey = "themeData";
