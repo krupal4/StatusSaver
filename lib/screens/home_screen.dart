@@ -1,6 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:status_saver/app_info.dart';
 import 'package:status_saver/common.dart';
+import 'package:status_saver/constants.dart';
 import 'package:status_saver/l10n/l10n.dart';
 import 'package:status_saver/models/tab_type.dart';
 import 'package:status_saver/provider/locale_provider.dart';
@@ -112,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _showLanguageChooser(BuildContext context) {
     final localeProvider = Provider.of<LocaleProvider>(context, listen: false);
-    String tempSelectedLanguageCode = localeProvider.locale.languageCode;
+    String tempSelectedLanguageCode = localeProvider.locale?.languageCode ?? systemLanguageCode;
     showDialog(
       context: context, 
       builder: (context) {
@@ -140,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           onChanged: (value) {
                             setState((){tempSelectedLanguageCode=value!;});
                           },
-                          title: Text('${L10n.getLanguageName(languageCode)} [$languageCode]')
+                          title: Text('${L10n.getLanguageName(languageCode)} ${languageCode != systemLanguageCode ? "[$languageCode]" : emptyString}')
                         );
                       },
                     ),

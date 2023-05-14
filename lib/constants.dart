@@ -17,3 +17,5 @@ const w4bPackageName = "com.whatsapp.w4b";
 
 const languageCodeKey = "languageCode";
 const defaultLanguageCode = "en";
+const systemLanguageCode = "system";
+const emptyString = '';

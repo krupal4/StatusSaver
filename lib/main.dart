@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
             AppLocalizations.delegate
           ],
           locale: localeProvider.locale,
-          supportedLocales: L10n.allSupportedLocales,
+          supportedLocales: AppLocalizations.supportedLocales,
           theme: ThemeData(
             useMaterial3: true,
             brightness: Brightness.light,
