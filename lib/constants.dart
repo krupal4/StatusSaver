@@ -14,3 +14,6 @@ const List<String> recentDirectoryPaths = [
 
 const whatsappPackageName = "com.whatsapp";
 const w4bPackageName = "com.whatsapp.w4b";
+
+const languageCodeKey = "languageCode";
+const defaultLanguageCode = "en";

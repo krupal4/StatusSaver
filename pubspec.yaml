@@ -49,6 +49,8 @@ dependencies:
   device_apps: ^2.2.0
   font_awesome_flutter: ^10.4.0
   fluttertoast: ^8.2.1
+  provider: ^6.0.5
+  shared_preferences: ^2.1.1
 
 dev_dependencies:
   flutter_test:
