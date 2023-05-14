@@ -1,18 +1,19 @@
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:status_saver/screens/home_screen.dart';
 import 'package:status_saver/common.dart';
+import 'package:status_saver/screens/home_screen.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Whatsapp Status Saver',
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:status_saver/common.dart';
 import 'package:status_saver/constants.dart';
 import 'package:status_saver/models/tab_type.dart';

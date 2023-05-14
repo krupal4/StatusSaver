@@ -24,7 +24,7 @@ class _VideoViewState extends State<VideoView> {
       autoInitialize: true,
       autoPlay: true,
       // looping: true,
-      showOptions: false,
+      showControls: false,
       aspectRatio: 9/16,
       errorBuilder: (_, errorMessage) {
         return Text(errorMessage);

@@ -1,6 +1,5 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:status_saver/common.dart';
 
 Future<bool> getStoragePermissions() async {
 
@@ -9,7 +8,7 @@ Future<bool> getStoragePermissions() async {
   late final Map<Permission,PermissionStatus> permissionStatuses;
   bool isStoragePermitted = true;
 
-  if (androidInfo.version.sdkInt >= 33) {
+  if (androidInfo.version.sdkInt >= 31) {
     permissionStatuses = await [
       Permission.manageExternalStorage
     ].request();
@@ -20,7 +19,6 @@ Future<bool> getStoragePermissions() async {
   }
 
   permissionStatuses.forEach((_, permissionStatus) {
-    log(permissionStatus.toString());
     if(permissionStatus != PermissionStatus.granted) {
       isStoragePermitted = false;
     }
