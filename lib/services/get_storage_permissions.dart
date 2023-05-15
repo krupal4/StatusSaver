@@ -5,23 +5,17 @@ Future<bool> getStoragePermissions() async {
 
   DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
   AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-  late final Map<Permission,PermissionStatus> permissionStatuses;
+  final PermissionStatus permissionStatus;
+  final Permission permission;
   bool isStoragePermitted = true;
 
-  if (androidInfo.version.sdkInt >= 31) {
-    permissionStatuses = await [
-      Permission.manageExternalStorage
-    ].request();
-  } else {
-    permissionStatuses = await [
-      Permission.storage
-    ].request();
-  }
+  permission = androidInfo.version.sdkInt >= 31 
+    ? Permission.manageExternalStorage
+    : Permission.storage;
+  permissionStatus = await permission.request();
 
-  permissionStatuses.forEach((_, permissionStatus) {
-    if(permissionStatus != PermissionStatus.granted) {
+  if(permissionStatus != PermissionStatus.granted) {
       isStoragePermitted = false;
-    }
-  });
+  }
   return isStoragePermitted;
 }
