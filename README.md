@@ -15,5 +15,5 @@ cd StatusSaver
 flutter pub get
 flutter run 
 ```
-<p> Wants to contribute ? Create PR </p>
-<p> Happy Coding :) </p>                              `
+<p> Wants to contribute ? Create PR, File any issue </p>
+<p> Happy Coding :) </p>

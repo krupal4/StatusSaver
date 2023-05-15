@@ -1,10 +1,10 @@
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:status_saver/common.dart';
-import 'package:status_saver/l10n/l10n.dart';
+import 'package:status_saver/provider/locale_provider.dart';
+import 'package:status_saver/provider/storage_permission_provider.dart';
 import 'package:status_saver/provider/theme_provider.dart';
 import 'package:status_saver/screens/home_screen.dart';
-import 'package:status_saver/provider/locale_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +19,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<LocaleProvider>(create: (context) => LocaleProvider()..initialize()),
-        ChangeNotifierProvider<ThemeModeProvider>(create: (context) => ThemeModeProvider()..initialize())
+        ChangeNotifierProvider<ThemeModeProvider>(create: (context) => ThemeModeProvider()..initialize()),
+        ChangeNotifierProvider<StoragePermissionProvider>(create: (context) => StoragePermissionProvider()..initialize())
       ],
       builder: (context,child) {
         final localeProvider = Provider.of<LocaleProvider>(context);

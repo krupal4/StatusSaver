@@ -17,7 +17,7 @@ class ThemeModeProvider extends ChangeNotifier {
   void setThemeMode(ThemeMode? themeMode) {
     SharedPreferences.getInstance().then((sharedPreferences) {
       final themeModeType = _getThemeModeType(themeMode);
-      sharedPreferences.setString(themeModeTypeKey,themeModeType ?? emptyString)
+      sharedPreferences.setString(themeModeTypeKey,themeModeType)
       .then((value) {
         if(!value) {
           showMessageWithoutUiBlock(message: 'Could not save your language preference'); // TODO: localize

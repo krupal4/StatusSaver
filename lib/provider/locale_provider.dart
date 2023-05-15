@@ -10,8 +10,8 @@ class LocaleProvider extends ChangeNotifier {
   void initialize() async {
     final sharedPreferences = await SharedPreferences.getInstance();
     final languageCode = sharedPreferences.getString(languageCodeKey);
-    if(languageCode != null || languageCode != systemLanguageCode) {
-      _locale = Locale(languageCode!);
+    if(languageCode != null && languageCode != systemLanguageCode) {
+      _locale = Locale(languageCode);
       notifyListeners();
     }
   }
@@ -21,13 +21,7 @@ class LocaleProvider extends ChangeNotifier {
   void setLocale(String languageCode) {
     if(!L10n.supportedLanguageCodes.contains(languageCode)) return;
 
-    if(languageCode == systemLanguageCode) {
-      _locale = null;
-      notifyListeners();
-      return;
-    }
-
-    _locale = Locale(languageCode);
+    _locale = languageCode == systemLanguageCode ? null : Locale(languageCode);
     SharedPreferences.getInstance().then((sharedPreferences) {
       sharedPreferences.setString(languageCodeKey,languageCode)
       .then((value) {
