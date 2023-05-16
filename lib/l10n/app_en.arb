@@ -1,34 +1,32 @@
 {
     "helloWorld": "Hello World!",
-    "@helloWorld": {
-        "description": "The conventional newborn programmer greeting"
-    },
     "appTitle": "WhatsApp Status Saver",
-    "@appTitle": {
-        "description": "The application's title"
-    },
     "recentStatuses": "Recent",
-    "@recentStatuses": {
-        "description": "Recently seen statuses"
-    },
     "savedStatuses": "Saved",
-    "@savedStatuses": {
-        "description": "Saved statuses"
-    },
     "statusSavedMessage": "Status saved",
-    "@statusSavedMessage": {
-        "description": "Status saved acknowledgement message"
-    },
     "noSavedStatusesMessage": "No saved statuses",
-    "@noSavedStatusesMessage": {
-        "description": "No saved statuses message"
-    },
     "noWhatsappFoundMessage": "Whatsapp does not exists on your mobile",
-    "@noWhatsappFoundMessage": {
-        "description": "No whatsapp in mobile found message"
-    },
     "appLanguageLabel": "App Language",
-    "@appLanguageLabel": {
-        "description": "Choose App Language"
-    }
+    "saveButtonLabel": "Save",
+    "shareButtonLabel": "Share",
+    "okButtonLabel": "OK",
+    "cancelButtonLabel": "CANCEL",
+    "closeButtonLabel": "CLOSE",
+    "howDoesItWorkTitle": "How does it work?",
+    "howDoesItWorkDescription": "We are not affiliated or officially connected with WhatsApp Inc in any way. And, we do not have any access to your WhatsApp messages.\n\nThis application is intended to provide you with a more convenient way to explore, save and share the status images and videos cached in your device storage",
+    "aboutButtonLabel": "About App",
+    "appThemeModeLabel":"App Theme Mode",
+    "systemDefaultLabel": "System Default",
+    "couldNotSaveYourLanguagePreference": "Could not save your language preference",
+    "couldNotSaveYourThemePreference": "Could not save your theme preference",
+    "giveStoragePermission": "Give storage permission",
+    "needToGiveStoragePermission": "You need to give storage permissions for this application.",
+    "couldNotOpenAppSettings": "Could not open app settings for storage permission.",
+    "allowStoragePermission": "Allow storage permission for Status Saver",
+    "openWhatsAppLabel": "Open WhatsApp",
+    "openW4BLabel": "Open WhatsApp Business",
+    "doNotHaveSeenStatusesMessage": "You do not have seen any statuses yet, go and watch some statuses",
+    "systemThemeLabel": "System Theme",
+    "lightThemeLabel": "Light Theme",
+    "darkThemeLabel": "Dark Theme"
 }

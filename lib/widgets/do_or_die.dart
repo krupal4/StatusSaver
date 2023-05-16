@@ -20,13 +20,13 @@ class DoOrDie extends StatelessWidget {
         if(snapshot.connectionState == ConnectionState.done) {
           if(snapshot.data!) {
             return onExists();
-          }// localise with appropriare message TODO:
+          }
           return NotFoundScreen(
             message: tabType == TabType.recent 
             ? AppLocalizations.of(context)?.noWhatsappFoundMessage ?? "Whatsapp or W4B Not found" 
             : AppLocalizations.of(context)?.noSavedStatusesMessage ?? "No saved statuses" );
         } else {
-          // TODO: return effective progress bar
+          // FIXME: return effective progress bar
           return const Center(child: CircularProgressIndicator());
         }
       }

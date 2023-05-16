@@ -14,13 +14,13 @@ class ThemeModeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setThemeMode(ThemeMode? themeMode) {
+  void setThemeMode(ThemeMode? themeMode, BuildContext context) {
     SharedPreferences.getInstance().then((sharedPreferences) {
       final themeModeType = _getThemeModeType(themeMode);
       sharedPreferences.setString(themeModeTypeKey,themeModeType)
       .then((value) {
         if(!value) {
-          showMessageWithoutUiBlock(message: 'Could not save your language preference'); // TODO: localize
+          showMessageWithoutUiBlock(message: AppLocalizations.of(context)?.couldNotSaveYourThemePreference ?? 'Could not save your theme preference');
         }
       });
     });
@@ -55,10 +55,10 @@ class MyThemes {
     ThemeMode.dark,
   ];
 
-  static List<String> themeModeTypes = [
-    "System Theme",
-    "Light Theme",
-    "Dark Theme"
+  static List<String> themeModeTypes(BuildContext context) => [
+    AppLocalizations.of(context)?.systemThemeLabel ?? "System Theme",
+    AppLocalizations.of(context)?.lightThemeLabel ?? "Light Theme",
+    AppLocalizations.of(context)?.darkThemeLabel ?? "Dark Theme"
   ];
 
   static List<Icon> themeModeIcons = const [

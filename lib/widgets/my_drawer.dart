@@ -17,7 +17,7 @@ class MyDrawer extends StatelessWidget {
         children: [
           ListTile(
             title:  Text(AppLocalizations.of(context)?.appLanguageLabel 
-              ??"App Language"),
+              ??"App Language",),
             leading: const Icon(Icons.translate),
             onTap: () {
               pop(context);
@@ -25,7 +25,7 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text("App Theme Mode"), // TODO: localize
+            title: Text(AppLocalizations.of(context)?.appThemeModeLabel ?? "App Theme Mode"),
             leading: const Icon(Icons.dark_mode_outlined),
             onTap: () {
               pop(context);
@@ -33,7 +33,7 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title:  const Text("About"), // TODO: localize
+            title:  Text(AppLocalizations.of(context)?.aboutButtonLabel ?? "About"),
             leading: const Icon(Icons.info),
             onTap: () {
               pop(context);
@@ -41,10 +41,10 @@ class MyDrawer extends StatelessWidget {
                 context: context,
                 applicationIcon: applicationIcon,
                 applicationVersion: applicationVersion,
-                applicationName: applicationName,
-                children: const [
-                  Text("How does it work?",style: TextStyle(fontSize: 22),), // TODO:
-                  Text("We are not affiliated or officially connected with WhatsApp Inc in any way. And, we do not have any access to your WhatsApp messages.\n\nThis application is intended to provide you with a more convenient way to explore, save and share the status images and videos cached in your device storage",style: TextStyle(fontSize: 18),) //TODO:
+                applicationName: applicationName(context),
+                children: [
+                  Text(AppLocalizations.of(context)?.howDoesItWorkTitle ?? "How does it work?",style: const TextStyle(fontSize: 22),),
+                  Text(AppLocalizations.of(context)?.howDoesItWorkDescription ?? "We are not affiliated or officially connected with WhatsApp Inc in any way. And, we do not have any access to your WhatsApp messages.\n\nThis application is intended to provide you with a more convenient way to explore, save and share the status images and videos cached in your device storage",style: const TextStyle(fontSize: 18),)
                 ]
               );
             },
@@ -61,20 +61,20 @@ class MyDrawer extends StatelessWidget {
         final themeModeProvider = Provider.of<ThemeModeProvider>(context, listen: false);
         return AlertDialog(
           content: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.22,// TODO: auto height
+            height: MediaQuery.of(context).size.height * 0.22,// FIXME: give auto height
             width: MediaQuery.of(context).size.width * 0.7,
             child: Scrollbar(
               child: Padding(
                 padding: const EdgeInsets.only(right: 12,),
                 child: ListView.builder(
-                  itemCount: MyThemes.themeModeTypes.length,
+                  itemCount: MyThemes.themeModeTypes(context).length,
                   itemBuilder: (context,index) {
                     return ListTile(
-                      title: Text(MyThemes.themeModeTypes[index]),
+                      title: Text(MyThemes.themeModeTypes(context)[index]),
                       leading: MyThemes.themeModeIcons[index],
                       trailing: themeModeProvider.themeMode == MyThemes.themeModes[index] ? const Icon(Icons.check): null,
                       onTap: () {
-                        themeModeProvider.setThemeMode(MyThemes.themeModes[index]);
+                        themeModeProvider.setThemeMode(MyThemes.themeModes[index], context);
                       },
                     );
                   },
@@ -87,7 +87,7 @@ class MyDrawer extends StatelessWidget {
               onPressed: () {
                 pop(context);
               }, 
-              child: const Text("CLOSE") // TODO: localize
+              child: Text(AppLocalizations.of(context)?.closeButtonLabel ?? "CLOSE")
             )
           ],
         );
@@ -110,7 +110,7 @@ class MyDrawer extends StatelessWidget {
                 style: const TextStyle(fontSize: 18)
               ),
               content: SizedBox(
-                height: double.maxFinite, // TODO: auto height
+                height: double.maxFinite, // FIXME: give auto height
                 width: MediaQuery.of(context).size.width * 0.85,
                 child: Scrollbar(
                   child: Padding(
@@ -125,7 +125,7 @@ class MyDrawer extends StatelessWidget {
                           onChanged: (value) {
                             setState((){tempSelectedLanguageCode=value!;});
                           },
-                          title: Text('${L10n.getLanguageName(languageCode)} ${languageCode != systemLanguageCode ? "[$languageCode]" : emptyString}')
+                          title: Text('${L10n.getLanguageName(languageCode, context)} ${languageCode != systemLanguageCode ? "[$languageCode]" : emptyString}')
                         );
                       },
                     ),
@@ -135,14 +135,14 @@ class MyDrawer extends StatelessWidget {
               actions: [
                 TextButton(
                   onPressed: () => pop(context), 
-                  child: const Text("CANCEL"),  // TODO:
+                  child: Text(AppLocalizations.of(context)?.cancelButtonLabel ?? "CANCEL"),
                 ),
                 TextButton(
                   onPressed: () {
                     pop(context);
-                    localeProvider.setLocale(tempSelectedLanguageCode);
+                    localeProvider.setLocale(tempSelectedLanguageCode, context);
                   }, 
-                  child: const Text("OK"), // TODO:
+                  child: Text(AppLocalizations.of(context)?.okButtonLabel ?? "OK"),
                 ),
               ],
             );

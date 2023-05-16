@@ -34,7 +34,7 @@ class StatusActions extends StatelessWidget {
           }
         },
         icon: const Icon(Icons.file_download_rounded),
-        label: const Text("Save"), // TODO save localize
+        label: Text(AppLocalizations.of(context)?.saveButtonLabel ?? "Save"),
       ));
     }
 
@@ -45,10 +45,10 @@ class StatusActions extends StatelessWidget {
         onPressed: () {
           Share.shareFiles([statusPath],
               subject:
-                  'Whatsapp Status'); // TODO: notification bar getting close (screen height changing issue)
+                  'Whatsapp Status'); // FIXME: notification bar getting close (screen height changing issue)
         },
         icon: const Icon(Icons.share_rounded),
-        label: const Text("Share"), // TODO localize app
+        label: Text(AppLocalizations.of(context)?.shareButtonLabel ?? "Share"),
       )
     ]);
 

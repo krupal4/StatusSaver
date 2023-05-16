@@ -18,7 +18,7 @@ class LocaleProvider extends ChangeNotifier {
 
   Locale? get locale => _locale;
 
-  void setLocale(String languageCode) {
+  void setLocale(String languageCode, BuildContext context) {
     if(!L10n.supportedLanguageCodes.contains(languageCode)) return;
 
     _locale = languageCode == systemLanguageCode ? null : Locale(languageCode);
@@ -26,7 +26,7 @@ class LocaleProvider extends ChangeNotifier {
       sharedPreferences.setString(languageCodeKey,languageCode)
       .then((value) {
         if(!value) {
-          showMessageWithoutUiBlock(message: 'Could not save your language preference'); // TODO: localize
+          showMessageWithoutUiBlock(message: AppLocalizations.of(context)?.couldNotSaveYourLanguagePreference ?? 'Could not save your language preference');
         }
       });
     });

@@ -18,7 +18,7 @@ List<String> getStatuses({required TabType tabType}) {
           return file.path;
         }));
       }
-      // TODO: handle stream of list using directory.list()
+      // FIXME: handle stream of list using directory.list()
     } catch (e) {
       log(e.toString());
     }
@@ -29,7 +29,7 @@ List<String> getStatuses({required TabType tabType}) {
 /// remove unnecessary files which are not statuses
 List<String> filter(List<String> statuses) {
   return statuses.where((status) {
-    // TODO: datewise sorting
+    // FIXME: date wise sorting
     return status.endsWith(mp4) || status.endsWith(jpg);
   }).toList();
 }

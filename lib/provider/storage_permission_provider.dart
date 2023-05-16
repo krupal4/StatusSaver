@@ -1,7 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:status_saver/app_info.dart';
 import 'package:status_saver/common.dart';
 import 'package:status_saver/services/show_without_ui_block_message.dart';
 
@@ -25,7 +24,7 @@ class StoragePermissionProvider extends ChangeNotifier {
 
   PermissionStatus? get status => _storagePermissionStatus;
 
-  void requestAndHandle() {
+  void requestAndHandle(BuildContext context) {
     if(_storagePermission == null) return;
 
     _storagePermission!.request()
@@ -47,9 +46,9 @@ class StoragePermissionProvider extends ChangeNotifier {
           openAppSettings()
           .then((value) {
             if(value) {
-              showMessageWithoutUiBlock(message: "Allow storage permission for $applicationName",toastLength: Toast.LENGTH_LONG); // TODO: localize
+              showMessageWithoutUiBlock(message: AppLocalizations.of(context)?.allowStoragePermission ?? "Allow storage permission for Status Saver",toastLength: Toast.LENGTH_LONG); // FIXME: dynamic app name
             } else {
-              showMessageWithoutUiBlock(message: "Could not open app settings for storage permission."); // TODO: localize
+              showMessageWithoutUiBlock(message: AppLocalizations.of(context)?.couldNotOpenAppSettings ?? "Could not open app settings for storage permission.");
             }
           });
           return;

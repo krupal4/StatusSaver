@@ -20,18 +20,19 @@ class GivePermissionsScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Padding(
-            padding: EdgeInsets.all(8.0),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Text(
-              "You need to give storage permissions for Status Saver application.", // TODO: localize and give better message using GPT
+              AppLocalizations.of(context)?.needToGiveStoragePermission ??
+              "You need to give storage permissions for this application.", // FIXME: give better message using GPT
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 18)
+              style: const TextStyle(fontSize: 18)
             ),
           ),
           ElevatedButton(
-            child: const Text("Give Storage Permission"), // TODO: localize
+            child: Text(AppLocalizations.of(context)?.giveStoragePermission ?? "Give Storage Permission"),
             onPressed: () {
-              storagePermissionProvider.requestAndHandle();
+              storagePermissionProvider.requestAndHandle(context);
             },
           ),
         ],

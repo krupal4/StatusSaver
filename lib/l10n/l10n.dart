@@ -11,9 +11,9 @@ class L10n {
 
   static final allSupportedLocales = supportedLanguageCodes.map((languageCode) => Locale(languageCode)).toList();
 
-  static String? getLanguageName(String languageCode) {
+  static String? getLanguageName(String languageCode, BuildContext context) {
     switch(languageCode) {
-      case 'system': return "System Default"; // TODO: localize
+      case 'system': return AppLocalizations.of(context)?.systemDefaultLabel ?? "System Default";
       case 'en': return "English";
       case 'hi': return "हिंदी";
       case 'gu': return "ગુજરાતી";

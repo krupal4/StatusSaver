@@ -9,20 +9,20 @@ class NoRecentStatusesFoundScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text("Go and watch some whatsapp statuses"),
+          padding: const EdgeInsets.all(8.0),
+          child: Text(AppLocalizations.of(context)?.doNotHaveSeenStatusesMessage ?? "You do not have seen any statuses yet, go and watch some statuses",style: const TextStyle(fontSize: 17),),
         ),
         LaunchApp(
             packageName: whatsappPackageName,
-            label: 'Open WhatsApp',
+            label: AppLocalizations.of(context)?.openWhatsAppLabel ??  'Open WhatsApp',
             iconData: FontAwesomeIcons.whatsapp),
         LaunchApp(
             packageName: w4bPackageName,
-            label: 'Open WhatsApp Business',
+            label: AppLocalizations.of(context)?.openW4BLabel ?? 'Open WhatsApp Business',
             iconData: FontAwesomeIcons.whatsapp)
       ],
     );
@@ -66,7 +66,7 @@ class LaunchApp extends StatelessWidget {
                     await launchApp(packageName: packageName),
               );
             }
-          } // TODO DO NOT append unnecessary widgets in tree
+          } // FIXME: DO NOT append unnecessary widgets in tree
           return const SizedBox();
         });
   }

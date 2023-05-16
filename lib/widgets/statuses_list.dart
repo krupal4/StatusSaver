@@ -54,7 +54,7 @@ class _StatusesListState extends State<StatusesList> {
     if(widget.tabType == TabType.recent) {
       return const NoRecentStatusesFoundScreen();
     } else {
-      return const NotFoundScreen(message: "No Saved Statuses Found"); // TODO: localize
+      return NotFoundScreen(message: AppLocalizations.of(context)?.noSavedStatusesMessage ?? "No Saved Statuses Found");
     }
   }
 }
