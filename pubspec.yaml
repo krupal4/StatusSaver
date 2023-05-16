@@ -51,6 +51,7 @@ dependencies:
   fluttertoast: ^8.2.1
   provider: ^6.0.5
   shared_preferences: ^2.1.1
+  quick_actions: ^1.0.3
 
 dev_dependencies:
   flutter_test:
