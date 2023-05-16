@@ -9,8 +9,8 @@ class LocaleProvider extends ChangeNotifier {
 
   void initialize() async {
     final sharedPreferences = await SharedPreferences.getInstance();
-    final languageCode = sharedPreferences.getString(languageCodeKey);
-    if(languageCode != null && languageCode != systemLanguageCode) {
+    final String? languageCode = sharedPreferences.getString(languageCodeKey);
+    if(languageCode != null && languageCode.toLanguageCode() != systemLanguageCode) {
       _locale = Locale(languageCode);
       notifyListeners();
     }
@@ -18,12 +18,12 @@ class LocaleProvider extends ChangeNotifier {
 
   Locale? get locale => _locale;
 
-  void setLocale(String languageCode, BuildContext context) {
-    if(!L10n.supportedLanguageCodes.contains(languageCode)) return;
+  void setLocale(LanguageCode languageCode, BuildContext context) {
+    if(!LanguageCode.values.contains(languageCode)) return;
 
-    _locale = languageCode == systemLanguageCode ? null : Locale(languageCode);
+    _locale = languageCode == systemLanguageCode ? null : Locale(languageCode.name);
     SharedPreferences.getInstance().then((sharedPreferences) {
-      sharedPreferences.setString(languageCodeKey,languageCode)
+      sharedPreferences.setString(languageCodeKey,languageCode.name)
       .then((value) {
         if(!value) {
           showMessageWithoutUiBlock(message: AppLocalizations.of(context)?.couldNotSaveYourLanguagePreference ?? 'Could not save your language preference');

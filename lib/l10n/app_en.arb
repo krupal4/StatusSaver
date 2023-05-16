@@ -1,6 +1,6 @@
 {
     "helloWorld": "Hello World!",
-    "appTitle": "WhatsApp Status Saver",
+    "appTitle": "Status Saver",
     "recentStatuses": "Recent",
     "savedStatuses": "Saved",
     "statusSavedMessage": "Status saved",

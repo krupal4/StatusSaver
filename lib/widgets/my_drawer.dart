@@ -97,7 +97,7 @@ class MyDrawer extends StatelessWidget {
 
   void _showLanguageChooser(BuildContext context) {
     final localeProvider = Provider.of<LocaleProvider>(context, listen: false);
-    String tempSelectedLanguageCode = localeProvider.locale?.languageCode ?? systemLanguageCode;
+    LanguageCode tempSelectedLanguageCode = localeProvider.locale?.languageCode.toLanguageCode() ?? systemLanguageCode;
     showDialog(
       context: context, 
       builder: (context) {
@@ -116,16 +116,16 @@ class MyDrawer extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(right: 12,),
                     child: ListView.builder(
-                      itemCount: L10n.supportedLanguageCodes.length,
+                      itemCount: LanguageCode.values.length,
                       itemBuilder: (context,index) {
-                        final String languageCode = L10n.supportedLanguageCodes[index];
+                        final LanguageCode languageCode = LanguageCode.values[index];
                         return RadioListTile(
-                          value: languageCode, 
+                          value: LanguageCode.values[index], 
                           groupValue: tempSelectedLanguageCode, 
                           onChanged: (value) {
                             setState((){tempSelectedLanguageCode=value!;});
                           },
-                          title: Text('${L10n.getLanguageName(languageCode, context)} ${languageCode != systemLanguageCode ? "[$languageCode]" : emptyString}')
+                          title: Text('${L10n.getLanguageName(languageCode, context)} ${languageCode != systemLanguageCode ? "[${languageCode.name}]" : emptyString}')
                         );
                       },
                     ),

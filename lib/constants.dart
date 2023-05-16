@@ -1,3 +1,5 @@
+import 'package:status_saver/l10n/l10n.dart';
+
 const String savedStatusesDirectory =
     "/storage/emulated/0/Download/Saved Statuses";
 
@@ -17,6 +19,6 @@ const w4bPackageName = "com.whatsapp.w4b";
 
 const languageCodeKey = "languageCode";
 const defaultLanguageCode = "en";
-const systemLanguageCode = "system";
+const systemLanguageCode = LanguageCode.system;
 const emptyString = '';
 const themeModeTypeKey = "themeData";
