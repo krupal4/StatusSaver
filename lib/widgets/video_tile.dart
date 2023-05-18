@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:status_saver/colors.dart';
+import 'package:status_saver/theme/colors.dart';
 import 'package:status_saver/common.dart';
 import 'package:status_saver/screens/video_view.dart';
 import 'package:status_saver/services/get_video_thumbnail.dart';
