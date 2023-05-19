@@ -23,8 +23,7 @@ class _VideoViewState extends State<VideoView> {
       videoPlayerController: VideoPlayerController.file(File(widget.videoPath)),
       autoInitialize: true,
       autoPlay: true,
-      // looping: true,
-      showControls: true,
+      showOptions: false,
       aspectRatio: 9/16,
       errorBuilder: (_, errorMessage) {
         return Text(errorMessage);
