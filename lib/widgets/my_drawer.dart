@@ -58,7 +58,7 @@ class MyDrawer extends StatelessWidget {
     return showDialog(
       context: context, 
       builder: (context) {
-        final themeModeProvider = Provider.of<ThemeModeProvider>(context, listen: false);
+        final themeModeProvider = context.watch<ThemeModeProvider>();
         return AlertDialog(
           content: SizedBox(
             height: MediaQuery.of(context).size.height * 0.22,// FIXME: give auto height
@@ -96,7 +96,7 @@ class MyDrawer extends StatelessWidget {
   }
 
   void _showLanguageChooser(BuildContext context) {
-    final localeProvider = Provider.of<LocaleProvider>(context, listen: false);
+    final localeProvider = context.watch<LocaleProvider>();
     LanguageCode tempSelectedLanguageCode = localeProvider.locale?.languageCode.toLanguageCode() ?? systemLanguageCode;
     showDialog(
       context: context, 

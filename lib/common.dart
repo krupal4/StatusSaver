@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:status_saver/constants.dart';
+import 'package:status_saver/models/tab_type.dart';
 
 export 'package:flutter/material.dart';
 export 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,4 +13,14 @@ void log(String message) {
 
 void pop(BuildContext context) {
   return Navigator.of(context).pop();
+}
+
+List<String> getDirectoryPaths(TabType tabType) {
+  return tabType == TabType.recent
+    ? recentDirectoryPaths
+    : const [savedStatusesDirectory];
+}
+
+bool isItStatusFile(String filePath) {
+  return filePath.endsWith(mp4) || filePath.endsWith(jpg);
 }

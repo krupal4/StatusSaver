@@ -21,15 +21,15 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider<LocaleProvider>(
-              create: (context) => LocaleProvider()..initialize()),
+              create: (_) => LocaleProvider()..initialize()),
           ChangeNotifierProvider<ThemeModeProvider>(
-              create: (context) => ThemeModeProvider()..initialize()),
+              create: (_) => ThemeModeProvider()..initialize()),
           ChangeNotifierProvider<StoragePermissionProvider>(
-              create: (context) => StoragePermissionProvider()..initialize())
+              create: (_) => StoragePermissionProvider()..initialize()),
         ],
         builder: (context, child) {
-          final localeProvider = Provider.of<LocaleProvider>(context);
-          final themeModeProvider = Provider.of<ThemeModeProvider>(context);
+          final localeProvider = context.watch<LocaleProvider>();
+          final themeModeProvider = context.watch<ThemeModeProvider>();
           return DynamicColorBuilder(builder:
               (ColorScheme? lightColorScheme, ColorScheme? darkColorScheme) {
             return MaterialApp(

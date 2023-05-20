@@ -8,7 +8,7 @@ class GivePermissionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {    
-    final storagePermissionProvider = Provider.of<StoragePermissionProvider>(context);
+    final storagePermissionProvider = context.watch<StoragePermissionProvider>();
     return Scaffold(
       appBar: AppBar(
         elevation: 3.5,
