@@ -18,7 +18,6 @@ class VideoTile extends StatelessWidget {
             elevation: 5,
             clipBehavior: Clip.hardEdge,
             child: InkWell(
-              splashColor: Colors.green.withAlpha(30),
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (_)=>VideoView(videoPath: videoPath)

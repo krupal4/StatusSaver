@@ -24,3 +24,5 @@ List<String> getDirectoryPaths(TabType tabType) {
 bool isItStatusFile(String filePath) {
   return filePath.endsWith(mp4) || filePath.endsWith(jpg);
 }
+
+String getSavedStatusPath(String statusPath) => "$savedStatusesDirectory/${statusPath.split('/').last}";

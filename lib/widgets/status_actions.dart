@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:share_plus/share_plus.dart';
 import 'package:status_saver/common.dart';
-import 'package:status_saver/constants.dart';
 import 'package:status_saver/services/show_without_ui_block_message.dart';
 
 class StatusActions extends StatelessWidget {
@@ -14,8 +13,7 @@ class StatusActions extends StatelessWidget {
     List<Widget> actions = [];
 
     // Insert Save status action
-    final String saveStatusPath =
-        "$savedStatusesDirectory/${statusPath.split('/').last}";
+    final String saveStatusPath = getSavedStatusPath(statusPath);
     if (saveStatusPath.compareTo(statusPath) != 0) {
       actions.add(FloatingActionButton.extended(
         heroTag: "Save status",

@@ -1,3 +1,4 @@
+import 'package:provider/provider.dart';
 import 'package:status_saver/common.dart';
 import 'package:status_saver/constants.dart';
 import 'package:status_saver/models/tab_type.dart';
@@ -10,34 +11,40 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class StatusesList extends StatelessWidget {
   final TabType tabType;
-  final StatusesProvider statusesProvider;
   const StatusesList({
     super.key,
     required this.tabType,
-    required this.statusesProvider,
   });
 
   @override
   Widget build(BuildContext context) {
 
-    List<String>? statuses = statusesProvider.statuses;
+    List<String>? statuses = context.watch<StatusesProvider>().statuses;
 
-    if(statuses != null && statuses.isNotEmpty) {
-      return StaggeredGridView.countBuilder(
-        padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-        crossAxisCount: 2,
-        mainAxisSpacing: 5,
-        crossAxisSpacing: 5,
-        staggeredTileBuilder: (index) => const StaggeredTile.fit(1),
-        itemCount: statuses.length,
-        itemBuilder: (context, index) {
-          final String statusPath  = statuses[index];
-          if(statusPath.endsWith(jpg)) {
-            return ImageTile(imagePath: statusPath);
-          } else {
-            return VideoTile(videoPath: statusPath);
+    if(statuses == null) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
+    if(statuses.isNotEmpty) {
+      return Scrollbar(
+        child: StaggeredGridView.countBuilder(
+          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+          crossAxisCount: 2,
+          mainAxisSpacing: 5,
+          crossAxisSpacing: 5,
+          staggeredTileBuilder: (index) => const StaggeredTile.fit(1),
+          itemCount: statuses.length,
+          itemBuilder: (context, index) {
+            final String statusPath  = statuses[index];
+            if(statusPath.endsWith(jpg)) {
+              return ImageTile(imagePath: statusPath);
+            } else {
+              return VideoTile(videoPath: statusPath);
+            }
           }
-        }
+        ),
       );
     }
     if(tabType == TabType.recent) {

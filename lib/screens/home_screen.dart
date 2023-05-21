@@ -71,8 +71,8 @@ class _HomeScreenState extends State<HomeScreen>
       );
     }
     const int savedStatusesTabIndex = 1;
-    late StatusesProvider recentStatusesProvider; 
-    late StatusesProvider savedStatusesProvider;
+    late BuildContext recentStatusesContext; // use for share
+    late BuildContext savedStatusesContext; // use for delete
 
     return WillPopScope(
       onWillPop: () async {
@@ -80,84 +80,73 @@ class _HomeScreenState extends State<HomeScreen>
         return shouldPop ?? false;
       },
       child: (storagePermissionProvider.status == PermissionStatus.granted)
-          ? MultiProvider(
-              providers: [
-                  ChangeNotifierProvider(
-                    create: (context) {
-                      recentStatusesProvider = StatusesProvider()..initialize(TabType.recent);
-                      return recentStatusesProvider;
-                    },
-                    lazy: false,
-                  ),
-                  ChangeNotifierProvider(
-                    create: (context) {
-                      savedStatusesProvider = StatusesProvider()..initialize(TabType.saved);
-                      return savedStatusesProvider;
-                    },
-                    lazy: false,
-                  ),
-                ],
-              builder: (context, __) {
-                return Scaffold(
-                  appBar: AppBar(
-                    title: Text(AppLocalizations.of(context)?.appTitle ??
-                        "WhatsApp Status Saver"),
-                    elevation: 4,
-                    centerTitle: true,
-                    bottom: TabBar(
-                      controller: _tabController,
-                      tabs: [
-                        MyTab(
-                          tabName:
-                              AppLocalizations.of(context)?.recentStatuses ??
-                                  "Recent",
-                        ),
-                        MyTab(
-                          tabName:
-                              AppLocalizations.of(context)?.savedStatuses ??
-                                  "Saved",
-                        ),
-                      ],
+          ? Scaffold(
+              appBar: AppBar(
+                title: Text(AppLocalizations.of(context)?.appTitle ??
+                    "WhatsApp Status Saver"),
+                elevation: 4,
+                centerTitle: true,
+                bottom: TabBar(
+                  controller: _tabController,
+                  tabs: [
+                    MyTab(
+                      tabName: AppLocalizations.of(context)?.recentStatuses ??
+                          "Recent",
                     ),
-                    actions: _tabController.index == savedStatusesTabIndex
-                        ? [
-                            IconButton(
-                              onPressed: () {
-                                // TODO: implement delete functionality
-                              },
-                              icon: const Icon(Icons.delete),
-                            ),
-                          ]
-                        : [
-                            IconButton(
-                                onPressed: () {
-                                  // TODO: share statuses
-                                },
-                                icon: const Icon(Icons.share)),
-                          ],
-                  ),
-                  drawer: const MyDrawer(),
-                  body: TabBarView(
-                    controller: _tabController,
-                    children: [
-                      DoOrDie(
-                        tabType: TabType.recent,
-                        onExists: () => StatusesList(
-                          tabType: TabType.recent,
-                          statusesProvider: recentStatusesProvider,
+                    MyTab(
+                      tabName: AppLocalizations.of(context)?.savedStatuses ??
+                          "Saved",
+                    ),
+                  ],
+                ),
+                actions: _tabController.index == savedStatusesTabIndex
+                    ? [
+                        IconButton(
+                          onPressed: () {
+                            // TODO: implement delete functionality
+                          },
+                          icon: const Icon(Icons.delete),
                         ),
-                      ),
-                      DoOrDie(
-                        tabType: TabType.saved,
-                        onExists: () => StatusesList(
+                      ]
+                    : [
+                        IconButton(
+                            onPressed: () {
+                              // TODO: share statuses
+                            },
+                            icon: const Icon(Icons.share)),
+                      ],
+              ),
+              drawer: const MyDrawer(),
+              body: TabBarView(
+                controller: _tabController,
+                children: [
+                  DoOrDie(
+                    tabType: TabType.recent,
+                    onExists: () => ChangeNotifierProvider(
+                        create: (_) =>
+                            StatusesProvider()..initialize(TabType.recent),
+                        builder: (recentContext, __) {
+                          recentStatusesContext = recentContext;
+                          return const StatusesList(
+                            tabType: TabType.recent,
+                          );
+                        }),
+                  ),
+                  ChangeNotifierProvider(
+                      create: (_) =>
+                          StatusesProvider()..initialize(TabType.saved),
+                      builder: (savedContext, __) {
+                        savedStatusesContext = savedContext;
+                        return DoOrDie(
                           tabType: TabType.saved,
-                          statusesProvider: savedStatusesProvider,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              })
+                          onExists: () => const StatusesList(
+                            tabType: TabType.saved,
+                          ),
+                        );
+                      }),
+                ],
+              ),
+            )
           : const GivePermissionsScreen(),
     );
   }
@@ -193,10 +182,11 @@ class MyTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          tabName,
-          style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w400),
-        ));
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        tabName,
+        style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w400),
+      ),
+    );
   }
 }
