@@ -53,6 +53,7 @@ dependencies:
   shared_preferences: ^2.1.1
   quick_actions: ^1.0.3
   dynamic_color: ^1.6.5
+  material_color_utilities: ">=0.2.0 <= 0.5.0" # ref: material_color_utilities: https://github.com/material-foundation/flutter-packages/blob/c89b650c71485495c0cf33e3ea3d5edf382b032d/packages/dynamic_color/pubspec.yaml#L24
 
 dev_dependencies:
   flutter_test:

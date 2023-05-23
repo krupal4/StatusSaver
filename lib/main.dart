@@ -7,6 +7,8 @@ import 'package:status_saver/provider/storage_permission_provider.dart';
 import 'package:status_saver/provider/theme_provider.dart';
 import 'package:status_saver/screens/home_screen.dart';
 import 'package:status_saver/theme/app_theme.dart';
+import 'package:status_saver/screens/pre_loading_screen.dart';
+import 'package:material_color_utilities/material_color_utilities.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,27 +30,43 @@ class MyApp extends StatelessWidget {
               create: (context) => StoragePermissionProvider()..initialize())
         ],
         builder: (context, child) {
-          final localeProvider = Provider.of<LocaleProvider>(context);
-          final themeModeProvider = Provider.of<ThemeModeProvider>(context);
-          return DynamicColorBuilder(builder:
-              (ColorScheme? lightColorScheme, ColorScheme? darkColorScheme) {
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: 'Whatsapp Status Saver',
-              localizationsDelegates: const [
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-                AppLocalizations.delegate
-              ],
-              locale: localeProvider.locale,
-              supportedLocales: AppLocalizations.supportedLocales,
-              themeMode: themeModeProvider.themeMode,
-              theme: AppTheme.lightTheme(lightColorScheme),
-              darkTheme: AppTheme.darkTheme(darkColorScheme),
-              home: const HomeScreen(),
-            );
-          });
+          final localeProvider = context.watch<LocaleProvider>();
+          final themeModeProvider = context.watch<ThemeModeProvider>();
+          return FutureBuilder<CorePalette?>(
+            future: DynamicColorPlugin.getCorePalette(),
+            builder: (context, snapshot) {
+              log(snapshot.connectionState.toString());
+              if (snapshot.connectionState == ConnectionState.done) {
+                final color = snapshot.data;
+                ColorScheme? lightColorScheme;
+                ColorScheme? darkColorScheme;
+                if (color != null) {
+                  CorePalette corePalette = color;
+                  lightColorScheme = corePalette.toColorScheme();
+                  darkColorScheme =
+                      corePalette.toColorScheme(brightness: Brightness.dark);
+                }
+                return MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  title: 'Whatsapp Status Saver',
+                  localizationsDelegates: const [
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                    AppLocalizations.delegate
+                  ],
+                  locale: localeProvider.locale,
+                  supportedLocales: AppLocalizations.supportedLocales,
+                  themeMode: themeModeProvider.themeMode,
+                  theme: AppTheme.lightTheme(lightColorScheme),
+                  darkTheme: AppTheme.darkTheme(darkColorScheme),
+                  home: const HomeScreen(),
+                );
+              } else {
+                return const Loading();
+              }
+            },
+          );
         });
   }
 }
