@@ -14,22 +14,21 @@ class VideoView extends StatefulWidget {
 }
 
 class _VideoViewState extends State<VideoView> {
-  late final ChewieController? _chewieController; 
+  late final ChewieController? _chewieController;
 
   @override
   void initState() {
     super.initState();
     _chewieController = ChewieController(
-      videoPlayerController: VideoPlayerController.file(File(widget.videoPath)),
-      autoInitialize: true,
-      autoPlay: true,
-      // looping: true,
-      showControls: true,
-      aspectRatio: 9/16,
-      errorBuilder: (_, errorMessage) {
-        return Text(errorMessage);
-      }
-    );
+        videoPlayerController:
+            VideoPlayerController.file(File(widget.videoPath)),
+        autoInitialize: true,
+        autoPlay: true,
+        showOptions: false,
+        aspectRatio: 9 / 16,
+        errorBuilder: (_, errorMessage) {
+          return Text(errorMessage);
+        });
   }
 
   @override
@@ -45,9 +44,13 @@ class _VideoViewState extends State<VideoView> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         leading: TextButton(
-          child: const Icon(Icons.arrow_back_ios_new_rounded,color: Colors.white,),
+          child: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Colors.white,
+          ),
           onPressed: () => pop(context),
-          ),),
+        ),
+      ),
       body: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -58,10 +61,12 @@ class _VideoViewState extends State<VideoView> {
             bottom: 33,
             right: 10,
             height: MediaQuery.of(context).size.height * 0.2,
-            child: StatusActions(statusPath: widget.videoPath,)
+            child: StatusActions(
+              statusPath: widget.videoPath,
+            ),
           ),
-        ]
-      )
+        ],
+      ),
     );
   }
 }
