@@ -41,7 +41,7 @@ class StatusesProvider extends ChangeNotifier {
   }
 
   /// statuses will not make request to directory returns saved list
-  List<String>? get statuses => _getStatuses();
+  List<String>? get statuses => _statuses;
 
   /// getStatuses will request 
   List<String>? get getStatuses => _getStatuses();
