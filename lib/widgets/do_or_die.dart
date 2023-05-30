@@ -2,14 +2,13 @@ import 'package:status_saver/common.dart';
 import 'package:status_saver/models/tab_type.dart';
 import 'package:status_saver/screens/not_found_screen.dart';
 import 'package:status_saver/services/is_directory_exists.dart';
+import 'package:status_saver/widgets/statuses_list.dart';
 
 class DoOrDie extends StatelessWidget {
   final TabType tabType; 
-  final Widget Function() onExists;
   const DoOrDie({
     super.key, 
-    required this.tabType,
-    required this.onExists, 
+    required this.tabType, 
   });
 
   @override
@@ -18,8 +17,9 @@ class DoOrDie extends StatelessWidget {
       future: isDirectoryExists(tabType: tabType),
       builder: (_,snapshot) {
         if(snapshot.connectionState == ConnectionState.done) {
+          log("in if  ${snapshot.data}");
           if(snapshot.data!) {
-            return onExists();
+            return StatusesList(tabType: tabType);
           }
           return NotFoundScreen(
             message: tabType == TabType.recent 
@@ -27,6 +27,7 @@ class DoOrDie extends StatelessWidget {
             : AppLocalizations.of(context)?.noSavedStatusesMessage ?? "No saved statuses" );
         } else {
           // FIXME: return effective progress bar
+          log("ues memememe");
           return const Center(child: CircularProgressIndicator());
         }
       }

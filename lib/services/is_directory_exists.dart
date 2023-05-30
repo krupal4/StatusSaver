@@ -8,6 +8,7 @@ Future<bool> isDirectoryExists({required TabType tabType}) async {
 
   for (String directoryPath in directoryPaths) {
     bool isDirExists = await Directory(directoryPath).exists();
+    log("$directoryPath :: $isDirExists");
     if (isDirExists) return true;
   }
   return false;

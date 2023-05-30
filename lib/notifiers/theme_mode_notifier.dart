@@ -1,17 +1,17 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:status_saver/common.dart';
 import 'package:status_saver/constants.dart';
 import 'package:status_saver/services/show_without_ui_block_message.dart';
 
-class ThemeModeProvider extends ChangeNotifier {
+class ThemeModeNotifier extends StateNotifier<ThemeMode?> {
 
-  ThemeMode? _themeMode;
+  ThemeModeNotifier(): super(null);
 
   void initialize() async {
     final sharedPreferences = await SharedPreferences.getInstance();
     String? themeModeType = sharedPreferences.getString(themeModeTypeKey);
-    _themeMode = _getThemeMode(themeModeType);
-    notifyListeners();
+    state = _getThemeMode(themeModeType);
   }
 
   void setThemeMode(ThemeMode? themeMode, BuildContext context) {
@@ -24,8 +24,7 @@ class ThemeModeProvider extends ChangeNotifier {
         }
       });
     });
-    _themeMode = themeMode;
-    notifyListeners();
+    state = themeMode;
   }
 
   static ThemeMode _getThemeMode(String? themeModeType) {
@@ -44,7 +43,7 @@ class ThemeModeProvider extends ChangeNotifier {
     }
   }
 
-  ThemeMode? get themeMode => _themeMode;
+  ThemeMode? get themeMode => state;
 }
 
 class MyThemes {

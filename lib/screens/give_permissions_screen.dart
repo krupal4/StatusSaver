@@ -1,14 +1,14 @@
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:status_saver/common.dart';
-import 'package:status_saver/provider/storage_permission_provider.dart';
+import 'package:status_saver/screens/home_screen.dart';
 import 'package:status_saver/widgets/my_drawer.dart';
 
-class GivePermissionsScreen extends StatelessWidget {
+class GivePermissionsScreen extends ConsumerWidget {
   const GivePermissionsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {    
-    final storagePermissionProvider = context.watch<StoragePermissionProvider>();
+  Widget build(BuildContext context,WidgetRef ref) {    
+    final storagePermissionNotifier = ref.watch(storagePermissionProvider.notifier);
     return Scaffold(
       appBar: AppBar(
         elevation: 3.5,
@@ -32,7 +32,7 @@ class GivePermissionsScreen extends StatelessWidget {
           ElevatedButton(
             child: Text(AppLocalizations.of(context)?.giveStoragePermission ?? "Give Storage Permission"),
             onPressed: () {
-              storagePermissionProvider.requestAndHandle(context);
+              storagePermissionNotifier.requestAndHandle(context);
             },
           ),
         ],
