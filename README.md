@@ -9,9 +9,11 @@ A WhatsApp status saver Flutter project.
 * Material3 UI
 
 ## Steps to run (on Android)
+
+Please install [flutter sdk](https://docs.flutter.dev/get-started/install) to run flutter commands on your machine.
+
 ``` 
-git clone https://github.com/immutable-krupal/StatusSaver.git 
-cd StatusSaver
+git clone https://github.com/immutable-krupal/StatusSaver.git && cd StatusSaver
 flutter pub get
 flutter run 
 ```
