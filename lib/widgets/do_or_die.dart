@@ -13,11 +13,13 @@ class DoOrDie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return FutureBuilder(
       future: isDirectoryExists(tabType: tabType),
       builder: (_,snapshot) {
         if(snapshot.connectionState == ConnectionState.done) {
-          log("in if  ${snapshot.data}");
           if(snapshot.data!) {
             return StatusesList(tabType: tabType);
           }
@@ -27,7 +29,6 @@ class DoOrDie extends StatelessWidget {
             : AppLocalizations.of(context)?.noSavedStatusesMessage ?? "No saved statuses" );
         } else {
           // FIXME: return effective progress bar
-          log("ues memememe");
           return const Center(child: CircularProgressIndicator());
         }
       }

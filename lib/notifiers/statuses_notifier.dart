@@ -15,10 +15,10 @@ class StatusesNotifier extends StateNotifier<List<String>?> {
         _statusesDirectoryPaths.add(statusesDirectoryPath);
       }
     }
-    _getStatuses();
+    state = _getStatuses();
   }
 
-  void _getStatuses() {
+  List<String>? _getStatuses() {
     List<String>? statuses;
     for (final String statusesDirectoryPath in _statusesDirectoryPaths) {
       Directory dir = Directory(statusesDirectoryPath);
@@ -35,28 +35,29 @@ class StatusesNotifier extends StateNotifier<List<String>?> {
         statuses = tempStatuses;
       }
     }
-    if (state == null || !state!.equals(statuses ?? [])) {
-      state = statuses;
-    }
+    return statuses;
   }
 
-  void initialize() async {
-    final List<String> statusesDirectoryPaths = getDirectoryPaths(_tabType);
-
-    for (String statusesDirectoryPath in statusesDirectoryPaths) {
-      if (Directory(statusesDirectoryPath).existsSync()) {
-        _statusesDirectoryPaths.add(statusesDirectoryPath);
-      }
-    }
-
-    _getStatuses();
-  }
-
-  /// statuses will not make request to directory returns saved list
   List<String>? get statuses => state;
+
+  void add(String statusPath) {
+    try {
+      state!.insert(0, statusPath);
+    } catch(_) {
+      state = [ statusPath ];
+    }
+  }
 
   void remove(String statusPath) {
     state!.remove(statusPath);
+    File(statusPath).deleteSync();
+  }
+
+  void refresh() {
+    List<String> newState = _getStatuses() ?? [];
+    if(!newState.equals(state ?? [])) {
+      state = newState;
+    }
   }
 }
 

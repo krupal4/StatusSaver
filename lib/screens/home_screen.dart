@@ -16,10 +16,10 @@ final storagePermissionProvider =
 
 final recentStatusesProvider =
     StateNotifierProvider<StatusesNotifier, List<String>?>(
-        (ref) => StatusesNotifier(TabType.recent)..initialize());
+        (ref) => StatusesNotifier(TabType.recent));
 final savedStatusesProvider =
     StateNotifierProvider<StatusesNotifier, List<String>?>(
-        (ref) => StatusesNotifier(TabType.saved)..initialize());
+        (ref) => StatusesNotifier(TabType.saved));
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -30,19 +30,21 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late TabController _tabController;
   String shortcut = 'no action set';
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _tabController = TabController(vsync: this, length: HomeScreen.numOfTabs);
     initQuickActions();
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _tabController.dispose();
     super.dispose();
   }
@@ -80,7 +82,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
         child: CircularProgressIndicator(),
       );
     }
-    const int savedStatusesTabIndex = 1;
 
     return WillPopScope(
       onWillPop: () async {
@@ -105,22 +106,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                             "Saved"),
                   ],
                 ),
-                actions: _tabController.index == savedStatusesTabIndex
-                    ? [
-                        IconButton(
-                          onPressed: () {
-                            // TODO: implement delete functionality
-                          },
-                          icon: const Icon(Icons.delete),
-                        ),
-                      ]
-                    : [
-                        IconButton(
-                            onPressed: () {
-                              // TODO: share statuses
-                            },
-                            icon: const Icon(Icons.share)),
-                      ],
               ),
               drawer: const MyDrawer(),
               body: TabBarView(
@@ -135,6 +120,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     );
   }
 
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.resumed) {
+      ref.read(recentStatusesProvider.notifier).refresh();
+      ref.read(savedStatusesProvider.notifier).refresh();
+    }
+  }
   static Future<bool?> showExitConfirmDialog(BuildContext context) {
     return showDialog(
         context: context,
