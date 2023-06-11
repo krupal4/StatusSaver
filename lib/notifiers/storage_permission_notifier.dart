@@ -1,14 +1,16 @@
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:status_saver/common.dart';
 import 'package:status_saver/services/show_without_ui_block_message.dart';
 
-class StoragePermissionProvider extends ChangeNotifier {
+class StoragePermissionNotifier extends StateNotifier<PermissionStatus?> {
 
-  PermissionStatus? _storagePermissionStatus;
   Permission? _storagePermission;
   bool _tempFirstTime = true;
+
+  StoragePermissionNotifier(): super(null);
 
   void initialize() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
@@ -17,12 +19,10 @@ class StoragePermissionProvider extends ChangeNotifier {
     _storagePermission = androidInfo.version.sdkInt >= 31 
     ? Permission.manageExternalStorage
     : Permission.storage;
-    
-    _storagePermissionStatus = await _storagePermission?.request();
-    notifyListeners();
+    state = await _storagePermission?.request();
   }
 
-  PermissionStatus? get status => _storagePermissionStatus;
+  PermissionStatus? get status => state;
 
   void requestAndHandle(BuildContext context) {
     if(_storagePermission == null) return;
@@ -31,8 +31,7 @@ class StoragePermissionProvider extends ChangeNotifier {
     .then((status) async {
       switch(status) {
         case PermissionStatus.granted:
-          _storagePermissionStatus = PermissionStatus.granted;
-          notifyListeners();
+          state = PermissionStatus.granted;
           return;
         case PermissionStatus.denied:
           return;

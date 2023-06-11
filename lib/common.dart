@@ -26,3 +26,5 @@ bool isItStatusFile(String filePath) {
 }
 
 String getSavedStatusPath(String statusPath) => "$savedStatusesDirectory/${statusPath.split('/').last}";
+
+bool isItSavedStatus(statusPath) => getSavedStatusPath(statusPath).compareTo(statusPath) == 0;

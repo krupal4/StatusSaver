@@ -43,6 +43,7 @@ class _VideoViewState extends State<VideoView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
+        actions: [ if(isItSavedStatus(widget.videoPath)) DeleteAction(statusPath: widget.videoPath)],
         leading: TextButton(
           child: const Icon(
             Icons.arrow_back_ios_new_rounded,

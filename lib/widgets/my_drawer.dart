@@ -1,16 +1,16 @@
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:status_saver/app_info.dart';
 import 'package:status_saver/common.dart';
 import 'package:status_saver/constants.dart';
 import 'package:status_saver/l10n/l10n.dart';
-import 'package:status_saver/provider/locale_provider.dart';
-import 'package:status_saver/provider/theme_provider.dart';
+import 'package:status_saver/main.dart';
+import 'package:status_saver/notifiers/theme_mode_notifier.dart';
 
-class MyDrawer extends StatelessWidget {
+class MyDrawer extends ConsumerWidget {
   const MyDrawer({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Drawer(
       elevation: 2.5,
       child: ListView(
@@ -21,7 +21,7 @@ class MyDrawer extends StatelessWidget {
             leading: const Icon(Icons.translate),
             onTap: () {
               pop(context);
-              _showLanguageChooser(context);
+              _showLanguageChooser(context,ref);
             },
           ),
           ListTile(
@@ -29,7 +29,7 @@ class MyDrawer extends StatelessWidget {
             leading: const Icon(Icons.dark_mode_outlined),
             onTap: () {
               pop(context);
-              _showThemeModeSelector(context);
+              _showThemeModeSelector(context,ref);
             },
           ),
           ListTile(
@@ -54,11 +54,11 @@ class MyDrawer extends StatelessWidget {
     );
   }
 
-  Future<dynamic> _showThemeModeSelector(BuildContext context) {
+  Future<dynamic> _showThemeModeSelector(BuildContext context,WidgetRef ref) {
     return showDialog(
       context: context, 
       builder: (context) {
-        final themeModeProvider = context.watch<ThemeModeProvider>();
+        final themeModeNotifier = ref.watch(themeModeProvider.notifier);
         return AlertDialog(
           content: SizedBox(
             height: MediaQuery.of(context).size.height * 0.22,// FIXME: give auto height
@@ -72,9 +72,9 @@ class MyDrawer extends StatelessWidget {
                     return ListTile(
                       title: Text(MyThemes.themeModeTypes(context)[index]),
                       leading: MyThemes.themeModeIcons[index],
-                      trailing: themeModeProvider.themeMode == MyThemes.themeModes[index] ? const Icon(Icons.check): null,
+                      trailing: themeModeNotifier.themeMode == MyThemes.themeModes[index] ? const Icon(Icons.check): null,
                       onTap: () {
-                        themeModeProvider.setThemeMode(MyThemes.themeModes[index], context);
+                        themeModeNotifier.setThemeMode(MyThemes.themeModes[index], context);
                       },
                     );
                   },
@@ -95,9 +95,9 @@ class MyDrawer extends StatelessWidget {
     );
   }
 
-  void _showLanguageChooser(BuildContext context) {
-    final localeProvider = context.watch<LocaleProvider>();
-    LanguageCode tempSelectedLanguageCode = localeProvider.locale?.languageCode.toLanguageCode() ?? systemLanguageCode;
+  void _showLanguageChooser(BuildContext context,WidgetRef ref) {
+    final localeProviderNotifier = ref.watch(localeProvider.notifier);
+    LanguageCode tempSelectedLanguageCode = localeProviderNotifier.locale?.languageCode.toLanguageCode() ?? systemLanguageCode;
     showDialog(
       context: context, 
       builder: (context) {
@@ -140,7 +140,7 @@ class MyDrawer extends StatelessWidget {
                 TextButton(
                   onPressed: () {
                     pop(context);
-                    localeProvider.setLocale(tempSelectedLanguageCode, context);
+                    localeProviderNotifier.setLocale(tempSelectedLanguageCode, context);
                   }, 
                   child: Text(AppLocalizations.of(context)?.okButtonLabel ?? "OK"),
                 ),

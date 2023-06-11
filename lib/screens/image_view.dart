@@ -13,6 +13,7 @@ class ImageView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
+        actions: [ if(isItSavedStatus(imagePath)) DeleteAction(statusPath: imagePath)],
         leading: TextButton(
           child: const Icon(Icons.arrow_back_ios_new_rounded,color: Colors.white,),
           onPressed: () => pop(context),
