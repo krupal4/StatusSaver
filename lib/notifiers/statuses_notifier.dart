@@ -49,7 +49,9 @@ class StatusesNotifier extends StateNotifier<List<String>?> {
   }
 
   void remove(String statusPath) {
-    state!.remove(statusPath);
+    List<String> tempState = state!;
+    tempState.remove(statusPath);  
+    state = [...tempState];
     File(statusPath).deleteSync();
   }
 
