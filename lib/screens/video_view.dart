@@ -7,7 +7,9 @@ import 'package:video_player/video_player.dart';
 
 class VideoView extends StatefulWidget {
   final String videoPath;
-  const VideoView({super.key, required this.videoPath});
+  final double height;
+  final double width;
+  const VideoView({super.key, required this.videoPath, required this.height, required this.width});
 
   @override
   State<VideoView> createState() => _VideoViewState();
@@ -25,7 +27,7 @@ class _VideoViewState extends State<VideoView> {
         autoInitialize: true,
         autoPlay: true,
         showOptions: false,
-        aspectRatio: 9 / 16,
+        aspectRatio: (widget.width / widget.height) * 9 / 16,
         errorBuilder: (_, errorMessage) {
           return Text(errorMessage);
         });

@@ -20,6 +20,12 @@ class StatusActions extends ConsumerWidget {
       actions.add(FloatingActionButton.extended(
         heroTag: "Save status",
         onPressed: () {
+          if (File(saveStatusPath).existsSync()) {
+            showMessageWithoutUiBlock(
+                message: AppLocalizations.of(context)?.statusSavedMessage ??
+                    "Status successfully saved");
+            return;
+          }
           try {
             File(saveStatusPath)
                 .create(recursive: true)
@@ -84,14 +90,18 @@ class DeleteAction extends ConsumerWidget {
                     ref.read(savedStatusesProvider.notifier).remove(statusPath);
                     pop(context);
                     pop(context);
-                    showMessageWithoutUiBlock(message: "Status deleted"); // TODO: localize
+                    showMessageWithoutUiBlock(
+                        message: "Status deleted"); // TODO: localize
                   },
                   child: const Text('DELETE')), // TODO: localize
             ],
           ),
         );
       },
-      icon: const Icon(Icons.delete_forever, color: Colors.white,),
+      icon: const Icon(
+        Icons.delete_forever,
+        color: Colors.white,
+      ),
     );
   }
 }

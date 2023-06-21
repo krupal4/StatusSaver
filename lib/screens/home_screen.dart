@@ -6,6 +6,7 @@ import 'package:status_saver/models/tab_type.dart';
 import 'package:status_saver/notifiers/statuses_notifier.dart';
 import 'package:status_saver/notifiers/storage_permission_notifier.dart';
 import 'package:status_saver/screens/give_permissions_screen.dart';
+import 'package:status_saver/services/delete_thumbnails.dart';
 import 'package:status_saver/widgets/do_or_die.dart';
 import 'package:status_saver/widgets/my_drawer.dart';
 import 'package:quick_actions/quick_actions.dart';
@@ -40,6 +41,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     WidgetsBinding.instance.addObserver(this);
     _tabController = TabController(vsync: this, length: HomeScreen.numOfTabs);
     initQuickActions();
+    deleteUnnecessaryThumbnailsIsolate([
+      ...ref.read(recentStatusesProvider)?.toList() ?? [],
+      ...ref.read(recentStatusesProvider)?.toList() ?? []
+    ]);
   }
 
   @override

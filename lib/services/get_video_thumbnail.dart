@@ -1,17 +1,33 @@
 import 'dart:io';
 
+import 'package:status_saver/common.dart';
 import 'package:status_saver/constants.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
+import 'package:status_saver/models/video_thumbnail.dart' as model;
 
-Future<String> getVideoThumbnail (String videoPath) async {
-  String? thumbnailPath = videoPath.replaceAll(mp4, png);
-  
-  return await File(thumbnailPath).exists().then((isExists) async {
-    if(isExists) {
-      return thumbnailPath!;
-    } else {
-      thumbnailPath = await VideoThumbnail.thumbnailFile(video: videoPath);
-      return thumbnailPath!;
-    }
-  });
+Future<model.VideoThumbnail> getVideoThumbnail(String videoPath) async {
+  final thumbnailData = await VideoThumbnail.thumbnailData(
+    video: videoPath,
+    quality: 75
+  );
+
+  // Ensure thumbnails folder exists
+  if(!Directory(thumbnailsDirectoryPath).existsSync()) {
+    Directory(thumbnailsDirectoryPath).createSync(recursive: true);
+  }
+
+  if (thumbnailData != null) {
+  model.VideoThumbnail videoThumbnail = model.VideoThumbnail(getThumbnailPath(videoPath));
+    // get height and width of video
+    // final image = await decodeImageFromList(thumbnailData);
+    // videoThumbnail.height = image.height * 1.0; 
+    // videoThumbnail.width = image.width * 1.0; 
+    final thumbnailFile = File(videoThumbnail.path);
+    await thumbnailFile.writeAsBytes(thumbnailData);
+    return videoThumbnail;
+  } else {
+    log("placeholder");
+    // Failed to generate thumbnail.
+    return model.VideoThumbnail.placeholder();
+  }
 }

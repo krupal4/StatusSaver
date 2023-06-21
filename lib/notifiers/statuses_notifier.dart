@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:status_saver/common.dart';
+import 'package:status_saver/constants.dart';
 import 'package:status_saver/models/tab_type.dart';
 
 class StatusesNotifier extends StateNotifier<List<String>?> {
@@ -52,7 +53,11 @@ class StatusesNotifier extends StateNotifier<List<String>?> {
     List<String> tempState = state!;
     tempState.remove(statusPath);  
     state = [...tempState];
-    File(statusPath).deleteSync();
+    File(statusPath).delete();
+    // if status is video remove its thumbnail as well
+    if(statusPath.endsWith(mp4)) {
+      File(getThumbnailPath(statusPath)).delete();
+    }
   }
 
   void refresh() {
