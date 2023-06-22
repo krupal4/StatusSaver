@@ -27,7 +27,7 @@ class _VideoViewState extends State<VideoView> {
         autoInitialize: true,
         autoPlay: true,
         showOptions: false,
-        aspectRatio: (widget.width / widget.height) * 9 / 16,
+        aspectRatio: widget.width / widget.height,
         errorBuilder: (_, errorMessage) {
           return Text(errorMessage);
         });

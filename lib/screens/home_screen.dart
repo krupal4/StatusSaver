@@ -133,27 +133,31 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
       ref.read(savedStatusesProvider.notifier).refresh();
     }
   }
+
   static Future<bool?> showExitConfirmDialog(BuildContext context) {
     return showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              actions: [
-                TextButton(
-                    onPressed: () => Navigator.pop(context, false),
-                    child: const Text("CANCEL")), // TODO: localize
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context, true);
-                      SystemNavigator.pop();
-                    },
-                    child: const Text("EXIT")), // TODO: localize
-              ],
-              title: const Text("Exit Warning"),
-              content: const Text(
-                "Are you sure you want to exit ?",
-                style: TextStyle(fontSize: 18),
-              ), // TODO: localize
-            ));
+      context: context,
+      builder: (context) => AlertDialog(
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text("CANCEL"),
+          ), // TODO: localize
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context, true);
+              SystemNavigator.pop();
+            },
+            child: const Text("EXIT"),
+          ), // TODO: localize
+        ],
+        title: const Text("Exit Warning"),
+        content: const Text(
+          "Are you sure you want to exit ?",
+          style: TextStyle(fontSize: 18),
+        ), // TODO: localize
+      ),
+    );
   }
 }
 

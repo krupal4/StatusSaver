@@ -78,7 +78,9 @@ class DeleteAction extends ConsumerWidget {
           context: context,
           builder: (context) => AlertDialog(
             content: const Text(
-                "Do you want to permanently delete this status ?"), // TODO: localize
+                "Do you want to permanently delete this status ?",
+                style: TextStyle(fontSize: 18),
+                ), // TODO: localize
             actions: [
               TextButton(
                   onPressed: () {
