@@ -13,9 +13,6 @@ class DoOrDie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
-
     return FutureBuilder(
       future: isDirectoryExists(tabType: tabType),
       builder: (_,snapshot) {
