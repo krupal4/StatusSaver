@@ -28,5 +28,12 @@
     "doNotHaveSeenStatusesMessage": "आपने अबतक कोई स्थिति नहीं देखी है, कुछ स्थितियाँ देखें",
     "systemThemeLabel": "सिस्टम थीम",
     "lightThemeLabel": "लाइट थीम",
-    "darkThemeLabel": "डार्क थीम"
+    "darkThemeLabel": "डार्क थीम",
+    "exitButtonLabel": "बाहर निकलें",
+	"exitWarningTitle": "स्थिति संग्रहक से बाहर निकलें",
+	"exitWarningMessage": "क्या आप निश्चित रूप से बाहर निकलना चाहते हैं?",
+	"deleteButtonLabel": "हटाएं",
+	"deleteStatusWarningTitle": "स्थिति हटाएं",
+	"deleteStatusWarningMessage": "क्या आप इस स्थिति को स्थायी रूप से हटाना चाहते हैं?",
+	"deletedStatusMessage": "स्थिति हटा दी गई"
 }

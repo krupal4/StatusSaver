@@ -28,5 +28,12 @@
     "doNotHaveSeenStatusesMessage": "Hələ heç bir status görməmisiniz, get və bir neçə status izləyin",
     "systemThemeLabel": "Sistem Teması",
     "lightThemeLabel": "Açıq Tema",
-    "darkThemeLabel": "Tünd Tema"
+    "darkThemeLabel": "Tünd Tema",
+    "exitButtonLabel": "ÇIXIŞ",
+    "exitWarningTitle": "StatusSaver'dan Çıxmaq",
+    "exitWarningMessage": "Çıxmağa əminsinizmi?",
+    "deleteButtonLabel": "SİL",
+    "deleteStatusWarningTitle": "Statusu Sil",
+    "deleteStatusWarningMessage": "Bu statusu daimi olaraq silmək istəyirsiniz?",
+    "deletedStatusMessage": "Status Silindi"
 }

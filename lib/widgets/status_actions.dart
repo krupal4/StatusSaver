@@ -77,25 +77,35 @@ class DeleteAction extends ConsumerWidget {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            content: const Text(
-                "Do you want to permanently delete this status ?",
-                style: TextStyle(fontSize: 18),
-                ), // TODO: localize
+            title: Text(
+                AppLocalizations.of(context)?.deleteStatusWarningTitle ??
+                    "Delete Status"),
+            content: Text(
+              AppLocalizations.of(context)?.deleteStatusWarningMessage ??
+                  "Do you want to permanently delete this status ?",
+              style: const TextStyle(fontSize: 18),
+            ),
             actions: [
               TextButton(
-                  onPressed: () {
-                    pop(context);
-                  },
-                  child: const Text('CANCEL')), // TODO: localize
+                onPressed: () {
+                  pop(context);
+                },
+                child: Text(AppLocalizations.of(context)?.cancelButtonLabel ??
+                    "CANCEL"),
+              ),
               TextButton(
-                  onPressed: () {
-                    ref.read(savedStatusesProvider.notifier).remove(statusPath);
-                    pop(context);
-                    pop(context);
-                    showMessageWithoutUiBlock(
-                        message: "Status deleted"); // TODO: localize
-                  },
-                  child: const Text('DELETE')), // TODO: localize
+                onPressed: () {
+                  ref.read(savedStatusesProvider.notifier).remove(statusPath);
+                  pop(context);
+                  pop(context);
+                  showMessageWithoutUiBlock(
+                      message:
+                          AppLocalizations.of(context)?.deletedStatusMessage ??
+                              "Status deleted");
+                },
+                child: Text(AppLocalizations.of(context)?.deleteButtonLabel ??
+                    "DELETE"),
+              ),
             ],
           ),
         );

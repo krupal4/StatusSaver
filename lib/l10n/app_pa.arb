@@ -28,5 +28,12 @@
     "doNotHaveSeenStatusesMessage": "ਤੁਹਾਡੇ ਕੋਲ ਕੋਈ ਸਥਿਤੀਆਂ ਦੇਖੀਆਂ ਨਹੀਂ ਗਈਆਂ ਹਨ, ਜਾਓ ਅਤੇ ਕੁਝ ਸਥਿਤੀਆਂ ਵੇਖੋ",
     "systemThemeLabel": "ਸਿਸਟਮ ਥੀਮ",
     "lightThemeLabel": "ਹਲਕੀ ਥੀਮ",
-    "darkThemeLabel": "ਅੰਧਕਾਰ ਥੀਮ"
+    "darkThemeLabel": "ਅੰਧਕਾਰ ਥੀਮ",
+    "exitButtonLabel": "ਬਾਹਰ ਜਾਓ",
+	"exitWarningTitle": "ਸਥਿਤੀ ਸੇਵਰ ਤੋਂ ਬਾਹਰ ਜਾਓ",
+	"exitWarningMessage": "ਕੀ ਤੁਸੀਂ ਪੁਸ਼ਟੀ ਕਰਦੇ ਹੋ ਕਿ ਤੁਸੀਂ ਬਾਹਰ ਜਾਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
+	"deleteButtonLabel": "ਹਟਾਓ",
+	"deleteStatusWarningTitle": "ਸਥਿਤੀ ਹਟਾਓ",
+	"deleteStatusWarningMessage": "ਕੀ ਤੁਸੀਂ ਇਹ ਸਥਿਤੀ ਪੱਕੇ ਤੌਰ 'ਤੇ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
+	"deletedStatusMessage": "ਸਥਿਤੀ ਹਟਾਈ ਗਈ ਹੈ"
 }

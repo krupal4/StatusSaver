@@ -28,5 +28,12 @@
     "doNotHaveSeenStatusesMessage": "Aún no has visto ningún estado, ve y mira algunos estados",
     "systemThemeLabel": "Tema del sistema",
     "lightThemeLabel": "Tema claro",
-    "darkThemeLabel": "Tema oscuro"
+    "darkThemeLabel": "Tema oscuro",
+	"exitButtonLabel": "SALIR",
+	"exitWarningTitle": "Salir de StatusSaver",
+	"exitWarningMessage": "¿Estás seguro de que quieres salir?",
+	"deleteButtonLabel": "ELIMINAR",
+	"deleteStatusWarningTitle": "Eliminar Estado",
+	"deleteStatusWarningMessage": "¿Deseas eliminar permanentemente este estado?",
+	"deletedStatusMessage": "Estado Eliminado"
 }

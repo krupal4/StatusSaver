@@ -28,5 +28,12 @@
     "doNotHaveSeenStatusesMessage": "ನೀವು ಯಾವುದೇ ಸ್ಥಿತಿಗಳನ್ನು ನೋಡಿಲ್ಲ, ಕೆಲವು ಸ್ಥಿತಿಗಳನ್ನು ನೋಡಲು ಹೋಗಿ",
     "systemThemeLabel": "ವ್ಯವಸ್ಥೆಯ ಥೀಮ್",
     "lightThemeLabel": "ಹೆಣ್ಣು ಥೀಮ್",
-    "darkThemeLabel": "ಕತ್ತಲ ಥೀಮ್"
+    "darkThemeLabel": "ಕತ್ತಲ ಥೀಮ್",
+    "exitButtonLabel": "ನಿರ್ಗಮಿಸು",
+	"exitWarningTitle": "ಸ್ಥಿತಿಸಂಗ್ರಹಕವನ್ನು ನಿರ್ಗಮಿಸಿ",
+	"exitWarningMessage": "ನೀವು ನಿಶ್ಚಯವಾಗಿ ನಿರ್ಗಮಿಸಲು ಬಯಸುವಿರಾ?",
+	"deleteButtonLabel": "ಅಳಿಸಿ",
+	"deleteStatusWarningTitle": "ಸ್ಥಿತಿಯನ್ನು ಅಳಿಸಿ",
+	"deleteStatusWarningMessage": "ನೀವು ಈ ಸ್ಥಿತಿಯನ್ನು ಶಾಶ್ವತವಾಗಿ ಅಳಿಸಬೇಕೆ?",
+	"deletedStatusMessage": "ಸ್ಥಿತಿ ಅಳಿಸಲಾಗಿದೆ"
 }

@@ -28,5 +28,12 @@
     "doNotHaveSeenStatusesMessage": "તમે હજી સુધી કોઈ સ્થિતિઓ જોવા નથી, થોડી સ્થિતિઓ જોવા જાઓ",
     "systemThemeLabel": "સિસ્ટમ થીમ",
     "lightThemeLabel": "લાઇટ થીમ",
-    "darkThemeLabel": "ડાર્ક થીમ"
+    "darkThemeLabel": "ડાર્ક થીમ",
+	"exitButtonLabel": "બહાર નીકળો",
+	"exitWarningTitle": "સ્થિતિસંગ્રાહકને બંધ કરો",
+	"exitWarningMessage": "શું તમે ખરેખર બહાર નીકળવા માંગો છો?",
+	"deleteButtonLabel": "કાઢી નાખો",
+	"deleteStatusWarningTitle": "સ્થિતિ કાઢી નાખો",
+	"deleteStatusWarningMessage": "શું તમે આ સ્થિતિને કાયમરી રૂપે કાઢી નાખવા માંગો છો?",
+	"deletedStatusMessage": "સ્થિતિ કાઢી નાખી દેવાયેલ"
 }

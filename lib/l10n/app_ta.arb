@@ -28,5 +28,12 @@
     "doNotHaveSeenStatusesMessage": "நீங்கள் எந்த ஸ்டேட்டஸ்களையும் பார்க்கவில்லை, சில ஸ்டேட்டஸ்களை பார்க்கவும்",
     "systemThemeLabel": "முக்கிய தீம்",
     "lightThemeLabel": "ஒளியான தீம்",
-    "darkThemeLabel": "இருண்ட தீம்"
+    "darkThemeLabel": "இருண்ட தீம்",
+    "exitButtonLabel": "வெளியேறு",
+	"exitWarningTitle": "நிறுவுவதை வெளியேறு",
+	"exitWarningMessage": "நீங்கள் உறுதியாக வெளியேற விரும்புகிறீர்களா?",
+	"deleteButtonLabel": "நீக்கு",
+	"deleteStatusWarningTitle": "நிலையை நீக்கு",
+	"deleteStatusWarningMessage": "இந்த நிலையை நிரந்தரமாக நீக்க விரும்புகிறீர்களா?",
+	"deletedStatusMessage": "நிலை நீக்கப்பட்டது"
 }

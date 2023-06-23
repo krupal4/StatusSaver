@@ -28,5 +28,12 @@
     "doNotHaveSeenStatusesMessage": "మీరు ఏమి స్థితులను చూడలేదు, కొనసాగిపోవడానికి స్థితులను చూడండి",
     "systemThemeLabel": "సిస్టమ్ థీమ్",
     "lightThemeLabel": "లైట్ థీమ్",
-    "darkThemeLabel": "డార్క్ థీమ్"
+    "darkThemeLabel": "డార్క్ థీమ్",
+    "exitButtonLabel": "నిష్క్రమించు",
+	"exitWarningTitle": "పరిస్థితి సేవకి నిష్క్రమించండి",
+	"exitWarningMessage": "నిజంగా నిష్క్రమించాలని మీరు ఖచ్చితంగా ఉంచారా?",
+	"deleteButtonLabel": "తొలగించు",
+	"deleteStatusWarningTitle": "స్థితిని తొలగించండి",
+	"deleteStatusWarningMessage": "మీరు ఈ స్థితిని శాశ్వతంగా తొలగించాలని మీరు కోరుకుంటున్నారా?",
+	"deletedStatusMessage": "స్థితి తొలగబడింది"
 }

@@ -28,5 +28,12 @@
     "doNotHaveSeenStatusesMessage": "아직 상태를 보지 않았습니다. 상태를 확인해보세요",
     "systemThemeLabel": "시스템 테마",
     "lightThemeLabel": "라이트 테마",
-    "darkThemeLabel": "다크 테마"
+    "darkThemeLabel": "다크 테마",
+    "exitButtonLabel": "종료",
+	"exitWarningTitle": "StatusSaver 종료",
+	"exitWarningMessage": "정말로 종료하시겠습니까?",
+	"deleteButtonLabel": "삭제",
+	"deleteStatusWarningTitle": "상태 삭제",
+	"deleteStatusWarningMessage": "이 상태를 영구적으로 삭제하시겠습니까?",
+	"deletedStatusMessage": "상태가 삭제되었습니다"
 }

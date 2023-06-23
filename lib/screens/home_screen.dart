@@ -141,21 +141,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text("CANCEL"),
-          ), // TODO: localize
+            child: Text(
+                AppLocalizations.of(context)?.cancelButtonLabel ?? "CANCEL"),
+          ),
           TextButton(
             onPressed: () {
               Navigator.pop(context, true);
               SystemNavigator.pop();
             },
-            child: const Text("EXIT"),
-          ), // TODO: localize
+            child:
+                Text(AppLocalizations.of(context)?.exitButtonLabel ?? "EXIT"),
+          ),
         ],
-        title: const Text("Exit Warning"),
-        content: const Text(
-          "Are you sure you want to exit ?",
-          style: TextStyle(fontSize: 18),
-        ), // TODO: localize
+        title: Text(
+            AppLocalizations.of(context)?.exitWarningTitle ?? "Exit Warning"),
+        content: Text(
+          AppLocalizations.of(context)?.exitWarningMessage ??
+              "Are you sure you want to exit ?",
+          style: const TextStyle(fontSize: 18),
+        ),
       ),
     );
   }

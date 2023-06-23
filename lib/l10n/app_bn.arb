@@ -28,5 +28,12 @@
     "doNotHaveSeenStatusesMessage": "আপনি এখনও কোনও স্থিতি দেখা করেননি, যান এবং কিছু স্থিতি দেখুন",
     "systemThemeLabel": "সিস্টেম থিম",
     "lightThemeLabel": "হালকা থিম",
-    "darkThemeLabel": "ডার্ক থিম"
+    "darkThemeLabel": "ডার্ক থিম",
+    "exitButtonLabel": "বাহির",
+    "exitWarningTitle": "স্থিতি সংরক্ষণকারী থেকে বেরিয়ে যেতে চান",
+    "exitWarningMessage": "আপনি কি নিশ্চিত যে আপনি বের হতে চান?",
+    "deleteButtonLabel": "মুছে ফেলুন",
+    "deleteStatusWarningTitle": "স্থিতি মুছুন",
+    "deleteStatusWarningMessage": "আপনি কি এই স্থিতি স্থায়ীভাবে মুছে ফেলতে চান?",
+    "deletedStatusMessage": "স্থিতি মুছে ফেলা হয়েছে"
 }

@@ -28,5 +28,12 @@
     "doNotHaveSeenStatusesMessage": "You do not have seen any statuses yet, go and watch some statuses",
     "systemThemeLabel": "System Theme",
     "lightThemeLabel": "Light Theme",
-    "darkThemeLabel": "Dark Theme"
+    "darkThemeLabel": "Dark Theme",
+    "exitButtonLabel": "EXIT",
+    "exitWarningTitle": "Exit StatusSaver",
+    "exitWarningMessage": "Are you sure you want to exit ?",
+    "deleteButtonLabel": "DELETE",
+    "deleteStatusWarningTitle": "Delete Status",
+    "deleteStatusWarningMessage": "Do you want to permanently delete this status ?",
+    "deletedStatusMessage": "Status Deleted"
 }

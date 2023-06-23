@@ -28,5 +28,12 @@
     "doNotHaveSeenStatusesMessage": "لم تشاهد أي حالات حتى الآن، اذهب وشاهد بعض الحالات",
     "systemThemeLabel": "وضعية التصميم النظام",
     "lightThemeLabel": "الوضع الفاتح",
-    "darkThemeLabel": "الوضع الداكن"
+    "darkThemeLabel": "الوضع الداكن",
+    "exitButtonLabel": "خروج",
+    "exitWarningTitle": "خروج من التطبيق",
+    "exitWarningMessage": "هل أنت متأكد من أنك تريد الخروج؟",
+    "deleteButtonLabel": "حذف",
+    "deleteStatusWarningTitle": "حذف الحالة",
+    "deleteStatusWarningMessage": "هل تريد حذف هذه الحالة نهائياً؟",
+    "deletedStatusMessage": "تم حذف الحالة"
 }

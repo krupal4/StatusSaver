@@ -28,5 +28,12 @@
     "doNotHaveSeenStatusesMessage": "まだステータスを閲覧していません。いくつかのステータスを見てください",
     "systemThemeLabel": "システムテーマ",
     "lightThemeLabel": "ライトテーマ",
-    "darkThemeLabel": "ダークテーマ"
+    "darkThemeLabel": "ダークテーマ",
+    "exitButtonLabel": "終了",
+	"exitWarningTitle": "StatusSaverを終了する",
+	"exitWarningMessage": "本当に終了しますか？",
+	"deleteButtonLabel": "削除",
+	"deleteStatusWarningTitle": "ステータスの削除",
+	"deleteStatusWarningMessage": "このステータスを永久に削除しますか？",
+	"deletedStatusMessage": "ステータスが削除されました"
 }
