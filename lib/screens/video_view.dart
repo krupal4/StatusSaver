@@ -9,7 +9,11 @@ class VideoView extends StatefulWidget {
   final String videoPath;
   final double height;
   final double width;
-  const VideoView({super.key, required this.videoPath, required this.height, required this.width});
+  const VideoView(
+      {super.key,
+      required this.videoPath,
+      required this.height,
+      required this.width});
 
   @override
   State<VideoView> createState() => _VideoViewState();
@@ -45,7 +49,13 @@ class _VideoViewState extends State<VideoView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        actions: [ if(isItSavedStatus(widget.videoPath)) DeleteAction(statusPath: widget.videoPath)],
+        actions: [
+          if (isItSavedStatus(widget.videoPath))
+            DeleteAction(
+              statusPath: widget.videoPath,
+              chewieController: _chewieController,
+            )
+        ],
         leading: TextButton(
           child: const Icon(
             Icons.arrow_back_ios_new_rounded,

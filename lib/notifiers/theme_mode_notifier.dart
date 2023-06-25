@@ -5,8 +5,7 @@ import 'package:status_saver/constants.dart';
 import 'package:status_saver/services/show_without_ui_block_message.dart';
 
 class ThemeModeNotifier extends StateNotifier<ThemeMode?> {
-
-  ThemeModeNotifier(): super(null);
+  ThemeModeNotifier() : super(null);
 
   void initialize() async {
     final sharedPreferences = await SharedPreferences.getInstance();
@@ -17,10 +16,12 @@ class ThemeModeNotifier extends StateNotifier<ThemeMode?> {
   void setThemeMode(ThemeMode? themeMode, BuildContext context) {
     SharedPreferences.getInstance().then((sharedPreferences) {
       final themeModeType = _getThemeModeType(themeMode);
-      sharedPreferences.setString(themeModeTypeKey,themeModeType)
-      .then((value) {
-        if(!value) {
-          showMessageWithoutUiBlock(message: AppLocalizations.of(context)?.couldNotSaveYourThemePreference ?? 'Could not save your theme preference');
+      sharedPreferences
+          .setString(themeModeTypeKey, themeModeType)
+          .then((value) {
+        if (!value) {
+          showMessageWithoutUiBlock(
+              message: context.l10n.couldNotSaveYourThemePreference);
         }
       });
     });
@@ -28,18 +29,24 @@ class ThemeModeNotifier extends StateNotifier<ThemeMode?> {
   }
 
   static ThemeMode _getThemeMode(String? themeModeType) {
-    switch(themeModeType) {
-      case 'light': return ThemeMode.light;
-      case 'dark': return ThemeMode.dark;
+    switch (themeModeType) {
+      case 'light':
+        return ThemeMode.light;
+      case 'dark':
+        return ThemeMode.dark;
     }
     return ThemeMode.system;
   }
 
   static String _getThemeModeType(ThemeMode? themeMode) {
-    switch(themeMode) {
-      case ThemeMode.light: return "light";
-      case ThemeMode.dark: return "dark";
-      case ThemeMode.system: default: return "system";
+    switch (themeMode) {
+      case ThemeMode.light:
+        return "light";
+      case ThemeMode.dark:
+        return "dark";
+      case ThemeMode.system:
+      default:
+        return "system";
     }
   }
 
@@ -47,7 +54,6 @@ class ThemeModeNotifier extends StateNotifier<ThemeMode?> {
 }
 
 class MyThemes {
-
   static List<ThemeMode> themeModes = [
     ThemeMode.system,
     ThemeMode.light,
@@ -55,10 +61,10 @@ class MyThemes {
   ];
 
   static List<String> themeModeTypes(BuildContext context) => [
-    AppLocalizations.of(context)?.systemThemeLabel ?? "System Theme",
-    AppLocalizations.of(context)?.lightThemeLabel ?? "Light Theme",
-    AppLocalizations.of(context)?.darkThemeLabel ?? "Dark Theme"
-  ];
+        context.l10n.systemThemeLabel,
+        context.l10n.lightThemeLabel,
+        context.l10n.darkThemeLabel
+      ];
 
   static List<Icon> themeModeIcons = const [
     Icon(Icons.hotel_class),

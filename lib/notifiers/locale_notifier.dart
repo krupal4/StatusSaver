@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:status_saver/common.dart';
 import 'package:status_saver/constants.dart';
-import 'package:status_saver/l10n/l10n.dart';
 import 'package:status_saver/services/show_without_ui_block_message.dart';
 
 class LocaleNotifier extends StateNotifier<Locale?> {
@@ -26,7 +25,7 @@ class LocaleNotifier extends StateNotifier<Locale?> {
       sharedPreferences.setString(languageCodeKey,languageCode.name)
       .then((value) {
         if(!value) {
-          showMessageWithoutUiBlock(message: AppLocalizations.of(context)?.couldNotSaveYourLanguagePreference ?? 'Could not save your language preference');
+          showMessageWithoutUiBlock(message: context.l10n.couldNotSaveYourLanguagePreference);
         }
       });
     });

@@ -7,12 +7,13 @@ class GivePermissionsScreen extends ConsumerWidget {
   const GivePermissionsScreen({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {    
-    final storagePermissionNotifier = ref.watch(storagePermissionProvider.notifier);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final storagePermissionNotifier =
+        ref.watch(storagePermissionProvider.notifier);
     return Scaffold(
       appBar: AppBar(
         elevation: 3.5,
-        title: Text(AppLocalizations.of(context)?.appTitle ?? "WhatsApp Status Saver"),
+        title: Text(context.l10n.appTitle),
         centerTitle: true,
       ),
       drawer: const MyDrawer(),
@@ -23,14 +24,16 @@ class GivePermissionsScreen extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              AppLocalizations.of(context)?.needToGiveStoragePermission ??
-              "You need to give storage permissions for this application.", // FIXME: give better message using GPT
+              context.l10n
+                  .needToGiveStoragePermission, // FIXME: give better message using GPT
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 18)
+              style: const TextStyle(
+                fontSize: 18,
+              ),
             ),
           ),
           ElevatedButton(
-            child: Text(AppLocalizations.of(context)?.giveStoragePermission ?? "Give Storage Permission"),
+            child: Text(context.l10n.giveStoragePermission),
             onPressed: () {
               storagePermissionNotifier.requestAndHandle(context);
             },

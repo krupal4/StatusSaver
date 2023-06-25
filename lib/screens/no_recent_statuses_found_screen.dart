@@ -14,15 +14,18 @@ class NoRecentStatusesFoundScreen extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(AppLocalizations.of(context)?.doNotHaveSeenStatusesMessage ?? "You do not have seen any statuses yet, go and watch some statuses",style: const TextStyle(fontSize: 17),),
+          child: Text(
+            context.l10n.doNotHaveSeenStatusesMessage,
+            style: const TextStyle(fontSize: 17),
+          ),
         ),
         LaunchApp(
             packageName: whatsappPackageName,
-            label: AppLocalizations.of(context)?.openWhatsAppLabel ??  'Open WhatsApp',
+            label: context.l10n.openWhatsAppLabel,
             iconData: FontAwesomeIcons.whatsapp),
         LaunchApp(
             packageName: w4bPackageName,
-            label: AppLocalizations.of(context)?.openW4BLabel ?? 'Open WhatsApp Business',
+            label: context.l10n.openW4BLabel,
             iconData: FontAwesomeIcons.whatsapp)
       ],
     );

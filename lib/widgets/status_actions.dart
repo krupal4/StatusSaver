@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:chewie/chewie.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:status_saver/common.dart';
@@ -19,29 +18,17 @@ class StatusActions extends ConsumerWidget {
     if (saveStatusPath.compareTo(statusPath) != 0) {
       actions.add(FloatingActionButton.extended(
         heroTag: "Save status",
-        onPressed: () {
-          if (File(saveStatusPath).existsSync()) {
-            showMessageWithoutUiBlock(
-                message: AppLocalizations.of(context)?.statusSavedMessage ??
-                    "Status successfully saved");
-            return;
+        onPressed: () async {
+          bool exists =
+              (ref.read(savedStatusesProvider) ?? []).contains(saveStatusPath);
+          if (!exists) {
+            await ref.read(savedStatusesProvider.notifier).add(statusPath);
           }
-          try {
-            File(saveStatusPath)
-                .create(recursive: true)
-                .then((value) => File(statusPath).copy(saveStatusPath))
-                .then((value) {
-              showMessageWithoutUiBlock(
-                  message: AppLocalizations.of(context)?.statusSavedMessage ??
-                      "Status successfully saved");
-              ref.read(savedStatusesProvider.notifier).add(saveStatusPath);
-            });
-          } catch (e) {
-            log("save ::: $e");
-          }
+          showMessageWithoutUiBlock(
+              getMessage: () => context.l10n.statusSavedMessage);
         },
         icon: const Icon(Icons.file_download_rounded),
-        label: Text(AppLocalizations.of(context)?.saveButtonLabel ?? "Save"),
+        label: Text(context.l10n.saveButtonLabel),
       ));
     }
 
@@ -55,7 +42,7 @@ class StatusActions extends ConsumerWidget {
                   'Whatsapp Status'); // FIXME: notification bar getting close (screen height changing issue)
         },
         icon: const Icon(Icons.share_rounded),
-        label: Text(AppLocalizations.of(context)?.shareButtonLabel ?? "Share"),
+        label: Text(context.l10n.shareButtonLabel),
       )
     ]);
 
@@ -68,43 +55,57 @@ class StatusActions extends ConsumerWidget {
 
 class DeleteAction extends ConsumerWidget {
   final String statusPath;
-  const DeleteAction({super.key, required this.statusPath});
+  final ChewieController? chewieController;
+  const DeleteAction(
+      {super.key, required this.statusPath, this.chewieController});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return IconButton(
       onPressed: () {
+        bool isVideoPlaying = chewieController?.isPlaying ?? false;
+        if (isVideoPlaying) {
+          chewieController?.pause();
+        }
         showDialog(
           context: context,
+          barrierDismissible: false,
           builder: (context) => AlertDialog(
-            title: Text(
-                AppLocalizations.of(context)?.deleteStatusWarningTitle ??
-                    "Delete Status"),
+            title: Text(context.l10n.deleteStatusWarningTitle),
             content: Text(
-              AppLocalizations.of(context)?.deleteStatusWarningMessage ??
-                  "Do you want to permanently delete this status ?",
+              context.l10n.deleteStatusWarningMessage,
               style: const TextStyle(fontSize: 18),
             ),
             actions: [
               TextButton(
                 onPressed: () {
                   pop(context);
+                  if (isVideoPlaying) {
+                    chewieController?.play();
+                  }
                 },
-                child: Text(AppLocalizations.of(context)?.cancelButtonLabel ??
-                    "CANCEL"),
+                child: Text(context.l10n.cancelButtonLabel),
               ),
               TextButton(
                 onPressed: () {
-                  ref.read(savedStatusesProvider.notifier).remove(statusPath);
-                  pop(context);
-                  pop(context);
-                  showMessageWithoutUiBlock(
-                      message:
-                          AppLocalizations.of(context)?.deletedStatusMessage ??
+                  ref
+                      .read(savedStatusesProvider.notifier)
+                      .remove(statusPath)
+                      .then(
+                    (value) {
+                      pop(context);
+                      pop(context);
+                      showMessageWithoutUiBlock(
+                          message: AppLocalizations.of(context)
+                                  ?.deletedStatusMessage ??
                               "Status deleted");
+                      if (isVideoPlaying) {
+                        chewieController?.play();
+                      }
+                    },
+                  );
                 },
-                child: Text(AppLocalizations.of(context)?.deleteButtonLabel ??
-                    "DELETE"),
+                child: Text(context.l10n.deleteButtonLabel),
               ),
             ],
           ),

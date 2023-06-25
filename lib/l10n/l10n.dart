@@ -25,7 +25,7 @@ class L10n {
 
   static String? getLanguageName(LanguageCode languageCode, BuildContext context) {
     switch(languageCode) {
-      case LanguageCode.system: return AppLocalizations.of(context)?.systemDefaultLabel ?? "System Default";
+      case LanguageCode.system: return context.l10n.systemDefaultLabel;
       case LanguageCode.en: return "English";
       case LanguageCode.hi: return "हिंदी";
       case LanguageCode.gu: return "ગુજરાતી";
@@ -50,4 +50,8 @@ extension LanguageCodeExtension on String {
   LanguageCode toLanguageCode() {
     return LanguageCode.values.firstWhere((element) => describeEnum(element) == this);
   }
+}
+
+extension LocalizationsContext on BuildContext {
+  AppLocalizations get l10n => AppLocalizations.of(this)!;
 }

@@ -28,10 +28,9 @@ class _StatusesListState extends State<StatusesList>
   Widget build(BuildContext context) {
     super.build(context);
     return Consumer(builder: (context, ref, _) {
-      List<String>? statuses = ref.watch(
-          widget.tabType == TabType.recent
-              ? recentStatusesProvider
-              : savedStatusesProvider);
+      List<String>? statuses = ref.watch(widget.tabType == TabType.recent
+          ? recentStatusesProvider
+          : savedStatusesProvider);
 
       if (statuses == null) {
         return const Center(
@@ -40,38 +39,35 @@ class _StatusesListState extends State<StatusesList>
       }
 
       if (statuses.isNotEmpty) {
-
         return Scrollbar(
-          controller: scrollController,
-          interactive: true,
-          child: StaggeredGridView.countBuilder(   
-              controller: scrollController,
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              crossAxisCount: 2,
-              mainAxisSpacing: 5,
-              crossAxisSpacing: 5,
-              staggeredTileBuilder: (index) => const StaggeredTile.fit(1),
-              itemCount: statuses.length,
-              itemBuilder: (context, index) {
-                final String statusPath = statuses[index];
-                if (statusPath.endsWith(jpg)) {
-                  return ImageTile(imagePath: statusPath);
-                } else {
-                  return VideoTile(videoPath: statusPath);
-                }
-              })
-        );
+            controller: scrollController,
+            interactive: true,
+            child: StaggeredGridView.countBuilder(
+                controller: scrollController,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                crossAxisCount: 2,
+                mainAxisSpacing: 5,
+                crossAxisSpacing: 5,
+                staggeredTileBuilder: (index) => const StaggeredTile.fit(1),
+                itemCount: statuses.length,
+                itemBuilder: (context, index) {
+                  final String statusPath = statuses[index];
+                  if (statusPath.endsWith(jpg)) {
+                    return ImageTile(imagePath: statusPath);
+                  } else {
+                    return VideoTile(videoPath: statusPath);
+                  }
+                }));
       }
       if (widget.tabType == TabType.recent) {
         return const NoRecentStatusesFoundScreen();
       } else {
-        return NotFoundScreen(
-            message: AppLocalizations.of(context)?.noSavedStatusesMessage ??
-                "No Saved Statuses Found");
+        return NotFoundScreen(message: context.l10n.noSavedStatusesMessage);
       }
     });
   }
-  
+
   @override
   void dispose() {
     scrollController.dispose();

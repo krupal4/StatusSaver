@@ -41,28 +41,29 @@ class StatusesNotifier extends StateNotifier<List<String>?> {
 
   List<String>? get statuses => state;
 
-  void add(String statusPath) {
-    try {
-      state!.insert(0, statusPath);
-    } catch(_) {
-      state = [ statusPath ];
-    }
+  Future<void> add(String statusPath) async {
+    final String savedStatusPath = getSavedStatusPath(statusPath);
+    await File(savedStatusPath).create(recursive: true);
+    await File(statusPath).copy(savedStatusPath);
+    List<String> tempState = [savedStatusPath, ...state ?? []];
+    state = tempState;
   }
 
-  void remove(String statusPath) {
+  Future<void> remove(String statusPath) async {
     List<String> tempState = state!;
-    tempState.remove(statusPath);  
+    tempState.remove(statusPath);
     state = [...tempState];
-    File(statusPath).delete();
+    if (!await File(statusPath).exists()) return;
+    await File(statusPath).delete();
     // if status is video remove its thumbnail as well
-    if(statusPath.endsWith(mp4)) {
+    if (statusPath.endsWith(mp4)) {
       File(getThumbnailPath(statusPath)).delete();
     }
   }
 
   void refresh() {
     List<String> newState = _getStatuses() ?? [];
-    if(!newState.equals(state ?? [])) {
+    if (!newState.equals(state ?? [])) {
       state = newState;
     }
   }

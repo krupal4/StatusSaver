@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:status_saver/app_info.dart';
 import 'package:status_saver/common.dart';
 import 'package:status_saver/constants.dart';
-import 'package:status_saver/l10n/l10n.dart';
 import 'package:status_saver/main.dart';
 import 'package:status_saver/notifiers/theme_mode_notifier.dart';
 
@@ -16,37 +15,41 @@ class MyDrawer extends ConsumerWidget {
       child: ListView(
         children: [
           ListTile(
-            title:  Text(AppLocalizations.of(context)?.appLanguageLabel 
-              ??"App Language",),
+            title: Text(context.l10n.appLanguageLabel),
             leading: const Icon(Icons.translate),
             onTap: () {
               pop(context);
-              _showLanguageChooser(context,ref);
+              _showLanguageChooser(context, ref);
             },
           ),
           ListTile(
-            title: Text(AppLocalizations.of(context)?.appThemeModeLabel ?? "App Theme Mode"),
+            title: Text(context.l10n.appThemeModeLabel),
             leading: const Icon(Icons.dark_mode_outlined),
             onTap: () {
               pop(context);
-              _showThemeModeSelector(context,ref);
+              _showThemeModeSelector(context, ref);
             },
           ),
           ListTile(
-            title:  Text(AppLocalizations.of(context)?.aboutButtonLabel ?? "About"),
+            title: Text(context.l10n.aboutButtonLabel),
             leading: const Icon(Icons.info),
             onTap: () {
               pop(context);
               showAboutDialog(
-                context: context,
-                applicationIcon: applicationIcon,
-                applicationVersion: applicationVersion,
-                applicationName: applicationName(context),
-                children: [
-                  Text(AppLocalizations.of(context)?.howDoesItWorkTitle ?? "How does it work?",style: const TextStyle(fontSize: 22),),
-                  Text(AppLocalizations.of(context)?.howDoesItWorkDescription ?? "We are not affiliated or officially connected with WhatsApp Inc in any way. And, we do not have any access to your WhatsApp messages.\n\nThis application is intended to provide you with a more convenient way to explore, save and share the status images and videos cached in your device storage",style: const TextStyle(fontSize: 18),)
-                ]
-              );
+                  context: context,
+                  applicationIcon: applicationIcon,
+                  applicationVersion: applicationVersion,
+                  applicationName: applicationName(context),
+                  children: [
+                    Text(
+                      context.l10n.howDoesItWorkTitle,
+                      style: const TextStyle(fontSize: 22),
+                    ),
+                    Text(
+                      context.l10n.howDoesItWorkDescription,
+                      style: const TextStyle(fontSize: 18),
+                    )
+                  ]);
             },
           ),
         ],
@@ -54,79 +57,88 @@ class MyDrawer extends ConsumerWidget {
     );
   }
 
-  Future<dynamic> _showThemeModeSelector(BuildContext context,WidgetRef ref) {
+  Future<dynamic> _showThemeModeSelector(BuildContext context, WidgetRef ref) {
     return showDialog(
-      context: context, 
-      builder: (context) {
-        final themeModeNotifier = ref.watch(themeModeProvider.notifier);
-        return AlertDialog(
-          content: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.22,// FIXME: give auto height
-            width: MediaQuery.of(context).size.width * 0.7,
-            child: Scrollbar(
-              child: Padding(
-                padding: const EdgeInsets.only(right: 12,),
-                child: ListView.builder(
-                  itemCount: MyThemes.themeModeTypes(context).length,
-                  itemBuilder: (context,index) {
-                    return ListTile(
-                      title: Text(MyThemes.themeModeTypes(context)[index]),
-                      leading: MyThemes.themeModeIcons[index],
-                      trailing: themeModeNotifier.themeMode == MyThemes.themeModes[index] ? const Icon(Icons.check): null,
-                      onTap: () {
-                        themeModeNotifier.setThemeMode(MyThemes.themeModes[index], context);
-                      },
-                    );
-                  },
+        context: context,
+        builder: (context) {
+          final themeModeNotifier = ref.watch(themeModeProvider.notifier);
+          return AlertDialog(
+            content: SizedBox(
+              height: MediaQuery.of(context).size.height *
+                  0.22, // FIXME: give auto height
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: Scrollbar(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    right: 12,
+                  ),
+                  child: ListView.builder(
+                    itemCount: MyThemes.themeModeTypes(context).length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(MyThemes.themeModeTypes(context)[index]),
+                        leading: MyThemes.themeModeIcons[index],
+                        trailing: themeModeNotifier.themeMode ==
+                                MyThemes.themeModes[index]
+                            ? const Icon(Icons.check)
+                            : null,
+                        onTap: () {
+                          themeModeNotifier.setThemeMode(
+                              MyThemes.themeModes[index], context);
+                        },
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                pop(context);
-              }, 
-              child: Text(AppLocalizations.of(context)?.closeButtonLabel ?? "CLOSE")
-            )
-          ],
-        );
-      }
-    );
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    pop(context);
+                  },
+                  child: Text(context.l10n.closeButtonLabel))
+            ],
+          );
+        });
   }
 
-  void _showLanguageChooser(BuildContext context,WidgetRef ref) {
+  void _showLanguageChooser(BuildContext context, WidgetRef ref) {
     final localeProviderNotifier = ref.watch(localeProvider.notifier);
-    LanguageCode tempSelectedLanguageCode = localeProviderNotifier.locale?.languageCode.toLanguageCode() ?? systemLanguageCode;
+    LanguageCode tempSelectedLanguageCode =
+        localeProviderNotifier.locale?.languageCode.toLanguageCode() ??
+            systemLanguageCode;
     showDialog(
-      context: context, 
-      builder: (context) {
-        return StatefulBuilder(
-          builder: (context, setState) {
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(builder: (context, setState) {
             return AlertDialog(
               contentPadding: const EdgeInsets.only(top: 4),
-              title: Text(
-                AppLocalizations.of(context)?.appLanguageLabel ?? "App Language",
-                style: const TextStyle(fontSize: 18)
-              ),
+              title: Text(context.l10n.appLanguageLabel,
+                  style: const TextStyle(fontSize: 18)),
               content: SizedBox(
                 height: double.maxFinite, // FIXME: give auto height
                 width: MediaQuery.of(context).size.width * 0.85,
                 child: Scrollbar(
                   child: Padding(
-                    padding: const EdgeInsets.only(right: 12,),
+                    padding: const EdgeInsets.only(
+                      right: 12,
+                    ),
                     child: ListView.builder(
                       itemCount: LanguageCode.values.length,
-                      itemBuilder: (context,index) {
-                        final LanguageCode languageCode = LanguageCode.values[index];
+                      itemBuilder: (context, index) {
+                        final LanguageCode languageCode =
+                            LanguageCode.values[index];
                         return RadioListTile(
-                          value: LanguageCode.values[index], 
-                          groupValue: tempSelectedLanguageCode, 
-                          onChanged: (value) {
-                            setState((){tempSelectedLanguageCode=value!;});
-                          },
-                          title: Text('${L10n.getLanguageName(languageCode, context)} ${languageCode != systemLanguageCode ? "[${languageCode.name}]" : emptyString}')
-                        );
+                            value: LanguageCode.values[index],
+                            groupValue: tempSelectedLanguageCode,
+                            onChanged: (value) {
+                              setState(() {
+                                tempSelectedLanguageCode = value!;
+                              });
+                            },
+                            title: Text(
+                                '${L10n.getLanguageName(languageCode, context)} ${languageCode != systemLanguageCode ? "[${languageCode.name}]" : emptyString}'));
                       },
                     ),
                   ),
@@ -134,20 +146,20 @@ class MyDrawer extends ConsumerWidget {
               ),
               actions: [
                 TextButton(
-                  onPressed: () => pop(context), 
-                  child: Text(AppLocalizations.of(context)?.cancelButtonLabel ?? "CANCEL"),
+                  onPressed: () => pop(context),
+                  child: Text(context.l10n.cancelButtonLabel),
                 ),
                 TextButton(
                   onPressed: () {
                     pop(context);
-                    localeProviderNotifier.setLocale(tempSelectedLanguageCode, context);
-                  }, 
-                  child: Text(AppLocalizations.of(context)?.okButtonLabel ?? "OK"),
+                    localeProviderNotifier.setLocale(
+                        tempSelectedLanguageCode, context);
+                  },
+                  child: Text(context.l10n.okButtonLabel),
                 ),
               ],
             );
-          }
-        );
-    });
+          });
+        });
   }
 }

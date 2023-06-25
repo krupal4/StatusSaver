@@ -96,19 +96,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
       child: (storagePermissionStatus == PermissionStatus.granted)
           ? Scaffold(
               appBar: AppBar(
-                title: Text(AppLocalizations.of(context)?.appTitle ??
-                    "WhatsApp Status Saver"),
+                title: Text(context.l10n.appTitle),
                 elevation: 4,
                 centerTitle: true,
                 bottom: TabBar(
                   controller: _tabController,
                   tabs: [
-                    MyTab(
-                        tabName: AppLocalizations.of(context)?.recentStatuses ??
-                            "Recent"),
-                    MyTab(
-                        tabName: AppLocalizations.of(context)?.savedStatuses ??
-                            "Saved"),
+                    MyTab(tabName: context.l10n.recentStatuses),
+                    MyTab(tabName: context.l10n.savedStatuses),
                   ],
                 ),
               ),
@@ -141,23 +136,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: Text(
-                AppLocalizations.of(context)?.cancelButtonLabel ?? "CANCEL"),
+            child: Text(context.l10n.cancelButtonLabel),
           ),
           TextButton(
             onPressed: () {
               Navigator.pop(context, true);
               SystemNavigator.pop();
             },
-            child:
-                Text(AppLocalizations.of(context)?.exitButtonLabel ?? "EXIT"),
+            child: Text(context.l10n.exitButtonLabel),
           ),
         ],
-        title: Text(
-            AppLocalizations.of(context)?.exitWarningTitle ?? "Exit Warning"),
+        title: Text(context.l10n.exitWarningTitle),
         content: Text(
-          AppLocalizations.of(context)?.exitWarningMessage ??
-              "Are you sure you want to exit ?",
+          context.l10n.exitWarningMessage,
           style: const TextStyle(fontSize: 18),
         ),
       ),
