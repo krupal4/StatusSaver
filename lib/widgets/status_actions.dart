@@ -17,7 +17,7 @@ class StatusActions extends ConsumerWidget {
     final String saveStatusPath = getSavedStatusPath(statusPath);
     if (saveStatusPath.compareTo(statusPath) != 0) {
       actions.add(FloatingActionButton.extended(
-        heroTag: "Save status",
+        heroTag: null,
         onPressed: () async {
           bool exists =
               (ref.read(savedStatusesProvider) ?? []).contains(saveStatusPath);
@@ -35,7 +35,7 @@ class StatusActions extends ConsumerWidget {
     actions.addAll([
       // Insert Share status action
       FloatingActionButton.extended(
-        heroTag: "Share status",
+        heroTag: null,
         onPressed: () {
           Share.shareFiles([statusPath],
               subject:

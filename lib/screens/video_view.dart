@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:chewie/chewie.dart';
 import 'package:status_saver/common.dart';
+import 'package:status_saver/theme/colors.dart';
 import 'package:status_saver/widgets/status_actions.dart';
 import 'package:video_player/video_player.dart';
 
@@ -67,8 +68,11 @@ class _VideoViewState extends State<VideoView> {
       body: Stack(
         clipBehavior: Clip.none,
         children: [
-          Chewie(
-            controller: _chewieController!,
+          Hero(
+            tag: widget.videoPath,
+            child: Chewie(
+              controller: _chewieController!,
+            ),
           ),
           Positioned(
             bottom: 33,

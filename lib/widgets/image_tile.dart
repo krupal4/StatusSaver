@@ -28,9 +28,12 @@ class ImageTile extends StatelessWidget {
             ),
           );
         },
-        child: Image.file(
-          File(imagePath),
-          fit: BoxFit.cover,
+        child: Hero(
+          tag: imagePath,
+          child: Image.file(
+            File(imagePath),
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );

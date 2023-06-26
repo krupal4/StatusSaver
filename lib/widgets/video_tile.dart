@@ -5,6 +5,7 @@ import 'package:status_saver/theme/colors.dart';
 import 'package:status_saver/common.dart';
 import 'package:status_saver/screens/video_view.dart';
 import 'package:status_saver/services/get_video_thumbnail.dart';
+
 class VideoTile extends StatelessWidget {
   final String videoPath;
   const VideoTile({super.key, required this.videoPath});
@@ -14,7 +15,7 @@ class VideoTile extends StatelessWidget {
     return FutureBuilder<VideoThumbnail>(
       future: getVideoThumbnail(videoPath),
       builder: ((_, snapshot) {
-        if(snapshot.connectionState == ConnectionState.done ) {
+        if (snapshot.connectionState == ConnectionState.done) {
           return Card(
             elevation: 5,
             clipBehavior: Clip.hardEdge,
@@ -30,7 +31,12 @@ class VideoTile extends StatelessWidget {
               ),
               child: Stack(
                 children: [
-                  Image.file(File(snapshot.data!.path)),
+                  Hero(
+                    tag: videoPath,
+                    child: Image.file(
+                      File(snapshot.data!.path),
+                    ),
+                  ),
                   Positioned.fill(
                     child: Container(
                       color: Colors.black54,
