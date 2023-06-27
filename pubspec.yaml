@@ -81,7 +81,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/ic_launcher.png
+    - lib/assets/app_icon.png
+    - lib/assets/splash_icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -110,9 +111,9 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 flutter_native_splash:
   color: "#FFFFFF"
-  image: assets/ic_launcher.png
+  image: lib/assets/splash_icon.png
   color_dark: "#000000"
 
 flutter_launcher_icons:
   android: "launcher_icon"
-  image_path: "assets//ic_launcher.png"
+  image_path: "lib/assets/app_icon.png"
