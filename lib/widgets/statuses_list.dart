@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:status_saver/common.dart';
 import 'package:status_saver/constants.dart';
 import 'package:status_saver/models/tab_type.dart';
-import 'package:status_saver/screens/home_screen.dart';
 import 'package:status_saver/screens/no_recent_statuses_found_screen.dart';
 import 'package:status_saver/screens/not_found_screen.dart';
 import 'package:status_saver/widgets/image_tile.dart';

@@ -25,7 +25,6 @@ class DoOrDie extends StatelessWidget {
                     ? context.l10n.noWhatsappFoundMessage
                     : context.l10n.noSavedStatusesMessage);
           } else {
-            // FIXME: return effective progress bar
             return const Center(child: CircularProgressIndicator());
           }
         });

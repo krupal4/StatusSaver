@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:status_saver/common.dart';
 import 'package:status_saver/constants.dart';
-import 'package:status_saver/services/show_without_ui_block_message.dart';
+import 'package:status_saver/services/show_toast.dart';
 
 class ThemeModeNotifier extends StateNotifier<ThemeMode?> {
   ThemeModeNotifier() : super(null);
@@ -20,7 +20,7 @@ class ThemeModeNotifier extends StateNotifier<ThemeMode?> {
           .setString(themeModeTypeKey, themeModeType)
           .then((value) {
         if (!value) {
-          showMessageWithoutUiBlock(
+          showToast(
               message: context.l10n.couldNotSaveYourThemePreference);
         }
       });

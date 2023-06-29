@@ -3,24 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:status_saver/common.dart';
 import 'package:status_saver/models/tab_type.dart';
-import 'package:status_saver/notifiers/statuses_notifier.dart';
-import 'package:status_saver/notifiers/storage_permission_notifier.dart';
 import 'package:status_saver/screens/give_permissions_screen.dart';
 import 'package:status_saver/services/delete_thumbnails.dart';
 import 'package:status_saver/widgets/do_or_die.dart';
 import 'package:status_saver/widgets/my_drawer.dart';
 import 'package:quick_actions/quick_actions.dart';
-
-final storagePermissionProvider =
-    StateNotifierProvider<StoragePermissionNotifier, PermissionStatus?>(
-        (ref) => StoragePermissionNotifier()..initialize());
-
-final recentStatusesProvider =
-    StateNotifierProvider<StatusesNotifier, List<String>?>(
-        (ref) => StatusesNotifier(TabType.recent));
-final savedStatusesProvider =
-    StateNotifierProvider<StatusesNotifier, List<String>?>(
-        (ref) => StatusesNotifier(TabType.saved));
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});

@@ -2,8 +2,7 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:status_saver/common.dart';
-import 'package:status_saver/screens/home_screen.dart';
-import 'package:status_saver/services/show_without_ui_block_message.dart';
+import 'package:status_saver/services/show_toast.dart';
 
 class StatusActions extends ConsumerWidget {
   final String statusPath;
@@ -24,7 +23,7 @@ class StatusActions extends ConsumerWidget {
           if (!exists) {
             await ref.read(savedStatusesProvider.notifier).add(statusPath);
           }
-          showMessageWithoutUiBlock(
+          showToast(
               getMessage: () => context.l10n.statusSavedMessage);
         },
         icon: const Icon(Icons.file_download_rounded),
@@ -37,6 +36,7 @@ class StatusActions extends ConsumerWidget {
       FloatingActionButton.extended(
         heroTag: null,
         onPressed: () {
+          // ignore: deprecated_member_use
           Share.shareFiles([statusPath],
               subject:
                   'Whatsapp Status'); // FIXME: notification bar getting close (screen height changing issue)
@@ -95,7 +95,7 @@ class DeleteAction extends ConsumerWidget {
                     (value) {
                       pop(context);
                       pop(context);
-                      showMessageWithoutUiBlock(
+                      showToast(
                           message: AppLocalizations.of(context)
                                   ?.deletedStatusMessage ??
                               "Status deleted");

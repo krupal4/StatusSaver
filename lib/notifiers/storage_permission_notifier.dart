@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:status_saver/common.dart';
-import 'package:status_saver/services/show_without_ui_block_message.dart';
+import 'package:status_saver/services/show_toast.dart';
 
 class StoragePermissionNotifier extends StateNotifier<PermissionStatus?> {
   Permission? _storagePermission;
@@ -42,11 +42,11 @@ class StoragePermissionNotifier extends StateNotifier<PermissionStatus?> {
           }
           openAppSettings().then((value) {
             if (value) {
-              showMessageWithoutUiBlock(
+              showToast(
                   message: context.l10n.allowStoragePermission,
                   toastLength: Toast.LENGTH_LONG); // FIXME: dynamic app name
             } else {
-              showMessageWithoutUiBlock(
+              showToast(
                   message: context.l10n.couldNotOpenAppSettings);
             }
           });

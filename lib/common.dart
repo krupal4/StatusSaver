@@ -5,6 +5,7 @@ import 'package:status_saver/models/tab_type.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter_gen/gen_l10n/app_localizations.dart';
 export 'package:status_saver/l10n/l10n.dart';
+export 'package:status_saver/providers.dart';
 
 void log(String message) {
   debugPrint("---------------------------------------------");

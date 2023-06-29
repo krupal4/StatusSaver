@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:status_saver/app_info.dart';
 import 'package:status_saver/common.dart';
 import 'package:status_saver/constants.dart';
-import 'package:status_saver/main.dart';
 import 'package:status_saver/notifiers/theme_mode_notifier.dart';
 
 class MyDrawer extends ConsumerWidget {

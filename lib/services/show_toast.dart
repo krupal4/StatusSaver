@@ -1,7 +1,7 @@
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:status_saver/common.dart';
 
-void showMessageWithoutUiBlock(
+void showToast(
     {String Function()? getMessage,
     String? message,
     Toast toastLength = Toast.LENGTH_SHORT}) {

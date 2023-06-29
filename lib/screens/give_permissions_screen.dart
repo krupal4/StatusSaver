@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:status_saver/common.dart';
-import 'package:status_saver/screens/home_screen.dart';
 import 'package:status_saver/widgets/my_drawer.dart';
 
 class GivePermissionsScreen extends ConsumerWidget {
