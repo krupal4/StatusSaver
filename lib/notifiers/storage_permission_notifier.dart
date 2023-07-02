@@ -18,7 +18,7 @@ class StoragePermissionNotifier extends StateNotifier<PermissionStatus?> {
     _storagePermission = androidInfo.version.sdkInt >= 31
         ? Permission.manageExternalStorage
         : Permission.storage;
-    state = await _storagePermission?.request();
+    state = await _storagePermission?.status;
   }
 
   PermissionStatus? get status => state;
