@@ -7,7 +7,7 @@ import 'package:status_saver/services/show_toast.dart';
 class ThemeModeNotifier extends StateNotifier<ThemeMode?> {
   ThemeModeNotifier() : super(null);
 
-  void initialize() async {
+  Future<void> initialize() async {
     final sharedPreferences = await SharedPreferences.getInstance();
     String? themeModeType = sharedPreferences.getString(themeModeTypeKey);
     state = _getThemeMode(themeModeType);

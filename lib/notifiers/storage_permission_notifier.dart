@@ -11,7 +11,7 @@ class StoragePermissionNotifier extends StateNotifier<PermissionStatus?> {
 
   StoragePermissionNotifier() : super(null);
 
-  void initialize() async {
+  Future<void> initialize() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
 
@@ -44,7 +44,7 @@ class StoragePermissionNotifier extends StateNotifier<PermissionStatus?> {
             if (value) {
               showToast(
                   message: context.l10n.allowStoragePermission,
-                  toastLength: Toast.LENGTH_LONG); // FIXME: dynamic app name
+                  toastLength: Toast.LENGTH_LONG);
             } else {
               showToast(
                   message: context.l10n.couldNotOpenAppSettings);

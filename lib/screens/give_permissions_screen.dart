@@ -1,21 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:status_saver/common.dart';
-import 'package:status_saver/widgets/my_drawer.dart';
+import 'package:status_saver/models/tab_type.dart';
+import 'package:status_saver/services/open_saf_permissions_dialog.dart';
 
 class GivePermissionsScreen extends ConsumerWidget {
-  const GivePermissionsScreen({super.key});
-
+  const GivePermissionsScreen({super.key, required this.tabType});
+  final TabType tabType;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final storagePermissionNotifier =
-        ref.watch(storagePermissionProvider.notifier);
     return Scaffold(
-      appBar: AppBar(
-        elevation: 3.5,
-        title: Text(context.l10n.appTitle),
-        centerTitle: true,
-      ),
-      drawer: const MyDrawer(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -34,7 +27,11 @@ class GivePermissionsScreen extends ConsumerWidget {
           ElevatedButton(
             child: Text(context.l10n.giveStoragePermission),
             onPressed: () {
-              storagePermissionNotifier.requestAndHandle(context);
+              if(tabType == TabType.saved) {
+              ref.read(storagePermissionProvider.notifier).requestAndHandle(context);
+              } else {
+                openSafPermissionsDialog(context, ref);
+              }
             },
           ),
         ],

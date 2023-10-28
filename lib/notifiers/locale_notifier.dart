@@ -7,7 +7,7 @@ import 'package:status_saver/services/show_toast.dart';
 class LocaleNotifier extends StateNotifier<Locale?> {
   LocaleNotifier(): super(null);
 
-  void initialize() async {
+  Future<void> initialize() async {
     final sharedPreferences = await SharedPreferences.getInstance();
     final String? languageCode = sharedPreferences.getString(languageCodeKey);
     if(languageCode != null && languageCode.toLanguageCode() != systemLanguageCode) {

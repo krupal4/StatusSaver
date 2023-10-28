@@ -7,6 +7,8 @@ export 'package:flutter_gen/gen_l10n/app_localizations.dart';
 export 'package:status_saver/l10n/l10n.dart';
 export 'package:status_saver/providers.dart';
 
+typedef Statuses = List<String>;
+
 void log(String message) {
   debugPrint("---------------------------------------------");
   debugPrint(message);

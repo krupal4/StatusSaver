@@ -1,30 +1,28 @@
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'common.dart';
-import 'models/tab_type.dart';
 import 'notifiers/locale_notifier.dart';
-import 'notifiers/statuses_notifier.dart';
+import 'notifiers/recent_statuses_notifier.dart';
+import 'notifiers/saved_statuses_notifier.dart';
 import 'notifiers/storage_permission_notifier.dart';
 import 'notifiers/theme_mode_notifier.dart';
 
-
 final localeProvider = StateNotifierProvider<LocaleNotifier, Locale?>(
-    (ref) => LocaleNotifier()..initialize());
-    
+    (ref) => LocaleNotifier());
+
 final themeModeProvider = StateNotifierProvider<ThemeModeNotifier, ThemeMode?>(
-    (ref) => ThemeModeNotifier()..initialize());
+    (ref) => ThemeModeNotifier());
 
 final storagePermissionProvider =
     StateNotifierProvider<StoragePermissionNotifier, PermissionStatus?>(
         (ref) => StoragePermissionNotifier());
 
 final recentStatusesProvider =
-    StateNotifierProvider<StatusesNotifier, List<String>?>(
-        (ref) => StatusesNotifier(TabType.recent));
+    StateNotifierProvider<RecentStatusesNotifier, Statuses>(
+        (ref) => RecentStatusesNotifier());
 
 final savedStatusesProvider =
-    StateNotifierProvider<StatusesNotifier, List<String>?>(
-        (ref) => StatusesNotifier(TabType.saved));
+    StateNotifierProvider<SavedStatusesNotifier, Statuses>(
+        (ref) => SavedStatusesNotifier());
 

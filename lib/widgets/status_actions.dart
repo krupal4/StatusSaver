@@ -5,8 +5,9 @@ import 'package:status_saver/common.dart';
 import 'package:status_saver/services/show_toast.dart';
 
 class StatusActions extends ConsumerWidget {
-  final String statusPath;
   const StatusActions({super.key, required this.statusPath});
+
+  final String statusPath;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,12 +20,10 @@ class StatusActions extends ConsumerWidget {
         heroTag: null,
         onPressed: () async {
           bool exists =
-              (ref.read(savedStatusesProvider) ?? []).contains(saveStatusPath);
-          if (!exists) {
-            await ref.read(savedStatusesProvider.notifier).add(statusPath);
+              ref.read(savedStatusesProvider).contains(saveStatusPath);
+          if (!exists && await ref.read(savedStatusesProvider.notifier).saveStatus(statusPath)) {
+            showToast(getMessage: () => context.l10n.statusSavedMessage);
           }
-          showToast(
-              getMessage: () => context.l10n.statusSavedMessage);
         },
         icon: const Icon(Icons.file_download_rounded),
         label: Text(context.l10n.saveButtonLabel),
@@ -54,10 +53,11 @@ class StatusActions extends ConsumerWidget {
 }
 
 class DeleteAction extends ConsumerWidget {
-  final String statusPath;
-  final ChewieController? chewieController;
   const DeleteAction(
       {super.key, required this.statusPath, this.chewieController});
+
+  final ChewieController? chewieController;
+  final String statusPath;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -90,10 +90,11 @@ class DeleteAction extends ConsumerWidget {
                 onPressed: () {
                   ref
                       .read(savedStatusesProvider.notifier)
-                      .remove(statusPath)
+                      .deleteStatus(statusPath)
                       .then(
                     (value) {
                       pop(context);
+                      if(!value) return;
                       pop(context);
                       showToast(
                           message: AppLocalizations.of(context)

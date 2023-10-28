@@ -53,8 +53,9 @@ dependencies:
   quick_actions: ^1.0.3
   dynamic_color: ^1.6.5
   flutter_riverpod: ^2.3.6
-  material_color_utilities: ^0.2.0
+  material_color_utilities: ^0.5.0
   flutter_native_splash: ^2.3.0
+  saf: ^1.0.3+4
 
 dev_dependencies:
   flutter_test:

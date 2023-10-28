@@ -27,15 +27,9 @@ class _StatusesListState extends State<StatusesList>
   Widget build(BuildContext context) {
     super.build(context);
     return Consumer(builder: (context, ref, _) {
-      List<String>? statuses = ref.watch(widget.tabType == TabType.recent
+      List<String> statuses = ref.watch(widget.tabType == TabType.recent
           ? recentStatusesProvider
           : savedStatusesProvider);
-
-      if (statuses == null) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      }
 
       if (statuses.isNotEmpty) {
         return Scrollbar(
@@ -58,8 +52,7 @@ class _StatusesListState extends State<StatusesList>
                     return VideoTile(videoPath: statusPath);
                   }
                 }));
-      }
-      if (widget.tabType == TabType.recent) {
+      } else if (widget.tabType == TabType.recent) {
         return const NoRecentStatusesFoundScreen();
       } else {
         return NotFoundScreen(message: context.l10n.noSavedStatusesMessage);

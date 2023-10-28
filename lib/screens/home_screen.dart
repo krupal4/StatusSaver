@@ -1,13 +1,10 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:status_saver/common.dart';
-import 'package:status_saver/models/tab_type.dart';
-import 'package:status_saver/screens/give_permissions_screen.dart';
-import 'package:status_saver/services/delete_thumbnails.dart';
-import 'package:status_saver/widgets/do_or_die.dart';
-import 'package:status_saver/widgets/my_drawer.dart';
 import 'package:quick_actions/quick_actions.dart';
+import 'package:status_saver/common.dart';
+import 'package:status_saver/widgets/my_drawer.dart';
+import 'package:status_saver/widgets/recent_statuses.dart';
+import 'package:status_saver/widgets/saved_statuses.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -28,10 +25,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     WidgetsBinding.instance.addObserver(this);
     _tabController = TabController(vsync: this, length: HomeScreen.numOfTabs);
     initQuickActions();
-    deleteUnnecessaryThumbnailsIsolate([
-      ...ref.read(recentStatusesProvider)?.toList() ?? [],
-      ...ref.read(recentStatusesProvider)?.toList() ?? []
-    ]);
   }
 
   @override
@@ -67,21 +60,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    final storagePermissionStatus = ref.watch(storagePermissionProvider);
-
-    if (storagePermissionStatus == null) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
-
     return WillPopScope(
       onWillPop: () async {
         final shouldPop = await showExitConfirmDialog(context);
         return shouldPop ?? false;
       },
-      child: (storagePermissionStatus == PermissionStatus.granted)
-          ? Scaffold(
+      child: Scaffold(
               appBar: AppBar(
                 title: Text(context.l10n.appTitle),
                 elevation: 4,
@@ -98,12 +82,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               body: TabBarView(
                 controller: _tabController,
                 children: const [
-                  DoOrDie(tabType: TabType.recent),
-                  DoOrDie(tabType: TabType.saved),
+                  RecentStatuses(),
+                  SavedStatuses(),
                 ],
               ),
-            )
-          : const GivePermissionsScreen(),
+            ),
     );
   }
 
