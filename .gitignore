@@ -45,3 +45,5 @@ app.*.map.json
 
 # developer dependent
 untranslated-messages.txt
+.fvm/*
+!.fvm/fvm_config.json
