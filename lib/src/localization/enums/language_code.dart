@@ -1,0 +1,19 @@
+enum LanguageCode {
+  system,
+  en,
+  af,
+  ar,
+  az,
+  bn,
+  es,
+  gu,
+  hi,
+  ja,
+  kn,
+  ko,
+  mr,
+  pa,
+  ta,
+  te,
+  ur
+}

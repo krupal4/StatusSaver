@@ -8,17 +8,14 @@ A WhatsApp status saver Flutter project.
 * Save statuses to Gallary
 * Material3 UI
 
-## Screen Recording
-https://github.com/immutable-krupal/StatusSaver/assets/70818026/e2eab748-eed3-4b3d-8f46-19f0b28da9bb
+## Contributing
 
-## Steps to run (on Android)
+Contributions are welcome!
 
-Please install [flutter sdk](https://docs.flutter.dev/get-started/install) to run flutter commands on your machine.
+Here is a curated list of how you can help:
 
-``` 
-git clone https://github.com/immutable-krupal/StatusSaver.git && cd StatusSaver
-flutter pub get
-flutter run 
-```
-<p> Wants to contribute? Create PR, File any issue </p>
-<p> Happy Coding :) </p>
+- Report bugs and scenarios that are difficult to implement
+- Report parts of the documentation that are unclear
+- Fix typos/grammar mistakes
+- Update the documentation or add examples
+- Implement new features by making a pull-request

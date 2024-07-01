@@ -1,4 +1,0 @@
-enum TabType {
-  recent,
-  saved
-}
