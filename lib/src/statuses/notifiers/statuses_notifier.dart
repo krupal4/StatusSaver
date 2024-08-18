@@ -12,8 +12,7 @@ import 'package:status_saver/src/home/models/tab_type.dart';
 import 'package:status_saver/src/home/services/android_info_notifier.dart';
 import 'package:status_saver/src/storage_permission/notifiers/storage_permission_notifier.dart';
 
-class StatusesNotifier
-    extends FamilyAsyncNotifier<List<String>, StatusTabType> {
+class StatusesNotifier extends FamilyAsyncNotifier<List<String>, StatusTabType> {
   @override
   FutureOr<List<String>> build(StatusTabType arg) async {
     state = const AsyncValue.loading();
@@ -26,9 +25,15 @@ class StatusesNotifier
       List<String> statusesDirAllFiles;
       final recentStatusesNotifier =
           ref.read(recentStoragePermissionProvider.notifier);
+      
       if (androidInfo.isAndroid11OrLater) {
         statusesDirAllFiles =
             await getStatusesDirFilesFromSaf(recentStatusesNotifier.saf()!);
+      } else if (androidInfo.isAndroid10OrBefore) {
+        statusesDirAllFiles = getDirectoryFilePaths(
+          recentStatusesNotifier.statusesPath()!,
+          whereCallback: isItStatusFile,
+        );
       } else {
         statusesDirAllFiles = getDirectoryFilePaths(
           recentStatusesNotifier.statusesPath()!,

@@ -91,7 +91,7 @@ class StoragePermissionNotifier
       final whatsAppType = await ref.watch(whatsAppTypeProvider.future);
 
       if (whatsAppType == null) {
-        state = AsyncError("Whats app not found", StackTrace.current);
+        state = AsyncError("WhatsApp not found", StackTrace.current);
         return;
       }
       _saf = Saf(_statusesPath!);
@@ -103,17 +103,22 @@ class StoragePermissionNotifier
   }
 
   Future<String> _getStatusesDirPath() async {
-    if (arg == StatusTabType.recent) {
-      return getStatusesPath(
-        (await ref.read(whatsAppTypeProvider.future))!,
-        (await ref.read(androidInfoProvider.future)).isAndroid11OrLater,
-      );
-    } else if (arg == StatusTabType.saved) {
-      return savedStatusesDirectory;
-    } else {
-      return "";
-    }
+  if (arg == StatusTabType.recent) {
+    final androidInfo = await ref.read(androidInfoProvider.future);
+    final whatsAppType = await ref.read(whatsAppTypeProvider.future);
+
+    return getStatusesPath(
+      whatsAppType!,
+      androidInfo.isAndroid11OrLater,
+      androidInfo.isAndroid10OrBefore, // For devices with A10 or below
+    );
+  } else if (arg == StatusTabType.saved) {
+    return savedStatusesDirectory;
+  } else {
+    return "";
   }
+}
+
 }
 
 final storagePermissionProvider = AsyncNotifierProvider.family<

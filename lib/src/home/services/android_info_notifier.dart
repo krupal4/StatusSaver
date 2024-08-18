@@ -9,9 +9,13 @@ final androidInfoProvider = FutureProvider<AndroidInfo>((ref) async {
 
   final bool isAndroid11OrLater = androidSdkApiLevel >= 30;
   final bool isAndroid13OrLater = androidSdkApiLevel >= 33;
+  final bool isAndroid10OrBefore = androidSdkApiLevel <= 29; // For devices with SDK 29 or older
+
   return AndroidInfo(
     androidSdkApiLevel: androidSdkApiLevel,
     isAndroid11OrLater: isAndroid11OrLater,
     isAndroid13OrLater: isAndroid13OrLater,
+    isAndroid10OrBefore: isAndroid10OrBefore,
   );
 });
+

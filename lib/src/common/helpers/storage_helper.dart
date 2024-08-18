@@ -2,18 +2,25 @@ import 'dart:io';
 
 import 'package:status_saver/src/home/models/whatsapp_type_enum.dart';
 
-String getStatusesPath(WhatsAppType whatsAppType, bool isAndroid11OrLater) {
+String getStatusesPath(WhatsAppType whatsAppType, bool isAndroid11OrLater, bool isAndroid10OrBefore) {
   if (whatsAppType == WhatsAppType.whatsApp) {
-    return isAndroid11OrLater
-        ? "Android/media/com.whatsapp/WhatsApp/Media/.Statuses"
-        : "";
+    if (isAndroid11OrLater) {
+      return "Android/media/com.whatsapp/WhatsApp/Media/.Statuses";
+    } else if (isAndroid10OrBefore) {
+      return "/storage/emulated/0/WhatsApp/Media/.Statuses/"; // Path for Android 10 or below
+    } else {
+      return "Android/media/com.whatsapp/WhatsApp/Media/.Statuses";
+    }
   } else if (whatsAppType == WhatsAppType.w4b) {
-    return isAndroid11OrLater
-        ? "Android/media/com.whatsapp.w4b/WhatsApp Business/Media/.Statuses"
-        : "";
+    if (isAndroid11OrLater) {
+      return "Android/media/com.whatsapp.w4b/WhatsApp Business/Media/.Statuses";
+    } else if (isAndroid10OrBefore) {
+      return "/storage/emulated/0/WhatsApp Business/Media/.Statuses/"; // Path for Android 10 or below
+    } else {
+      return "Android/media/com.whatsapp.w4b/WhatsApp Business/Media/.Statuses";
+    }
   } else {
-    throw Exception(
-        "Please provide statuses dir path for whatsapp type: '$whatsAppType'");
+    throw Exception("Please provide statuses dir path for whatsapp type: '$whatsAppType'");
   }
 }
 
