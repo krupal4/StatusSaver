@@ -13,6 +13,17 @@ subprojects {
     project.evaluationDependsOn(':app')
 }
 
+// Plugins released before AGP 8 declare their package only in the manifest,
+// which AGP 8 no longer reads. Fall back to the module group as the namespace.
+subprojects {
+    afterEvaluate { subproject ->
+        def androidExtension = subproject.extensions.findByName('android')
+        if (androidExtension != null && androidExtension.namespace == null) {
+            androidExtension.namespace = subproject.group.toString()
+        }
+    }
+}
+
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
