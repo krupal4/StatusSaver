@@ -14,7 +14,7 @@ import 'package:status_saver/src/common/extensions/permission_handler.dart';
 class StoragePermissionNotifier
     extends FamilyAsyncNotifier<bool, StatusTabType> {
   Saf? _saf;
-  late final String? _statusesPath;
+  String? _statusesPath;
 
   @override
   FutureOr<bool> build(StatusTabType arg) async {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:status_saver/src/common/helpers/app_haptics.dart';
+import 'package:status_saver/src/common/views/empty_state.dart';
 import 'package:status_saver/src/localization/extensions/on_build_context.dart';
 
 class GivePermissionsScreen extends StatelessWidget {
@@ -6,29 +8,23 @@ class GivePermissionsScreen extends StatelessWidget {
     super.key,
     required this.onRequestPermission,
   });
-  final void Function() onRequestPermission;
+  final VoidCallback onRequestPermission;
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            context.l10n
-                .needToGiveStoragePermission, // FIXME: give better message using GPT
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 18,
-            ),
-          ),
-        ),
-        ElevatedButton(
-          onPressed: onRequestPermission,
-          child: Text(context.l10n.giveStoragePermission),
-        ),
-      ],
+    return AppEmptyState(
+      icon: Icons.folder_open_rounded,
+      title: context.l10n.permissionTitle,
+      message:
+          '${context.l10n.needToGiveStoragePermission}\n\n${context.l10n.permissionPrivacyNote}',
+      action: FilledButton.icon(
+        onPressed: () {
+          AppHaptics.medium();
+          onRequestPermission();
+        },
+        icon: const Icon(Icons.lock_open_rounded),
+        label: Text(context.l10n.giveStoragePermission),
+      ),
     );
   }
 }

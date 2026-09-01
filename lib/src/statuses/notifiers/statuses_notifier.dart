@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:saf/saf.dart';
 import 'package:status_saver/src/common/helpers/statuses_helper.dart';
 import 'package:status_saver/src/common/helpers/storage_helper.dart';
@@ -35,14 +33,19 @@ class StatusesNotifier
           whereCallback: isItStatusFile,
         );
       }
-      return statusesDirAllFiles.where(isItStatusFile).toList();
+      return statusesDirAllFiles.where(isItStatusFile).toList()
+        ..sort(_byNewestFirst);
     } else if (arg == StatusTabType.saved) {
       final savedStatusesNotifier =
           ref.read(savedStoragePermissionProvider.notifier);
+      final String? savedPath = savedStatusesNotifier.statusesPath();
+      if (savedPath == null) {
+        return List.empty();
+      }
       return getDirectoryFilePaths(
-        savedStatusesNotifier.statusesPath()!,
+        savedPath,
         whereCallback: isItStatusFile,
-      );
+      )..sort(_byNewestFirst);
     } else {
       return List.empty();
     }
@@ -63,11 +66,14 @@ class StatusesNotifier
 
   Future<bool> saveStatus(String statusPath) async {
     try {
-      state = const AsyncLoading();
       final String savedStatusPath = getSavedStatusPath(statusPath);
       await File(savedStatusPath).create(recursive: true);
       await File(statusPath).copy(savedStatusPath);
-      state = AsyncValue.data(await getStatuses());
+      final List<String> current = List<String>.from(state.value ?? []);
+      if (!current.contains(savedStatusPath)) {
+        current.insert(0, savedStatusPath);
+        state = AsyncValue.data(current);
+      }
       return true;
     } catch (_) {
       return false;
@@ -75,26 +81,15 @@ class StatusesNotifier
   }
 
   Future<bool> deleteStatus(String statusPath) async {
-    final previousState = state;
+    final AsyncValue<List<String>> previousState = state;
     try {
       final File status = File(statusPath);
-      state = const AsyncLoading();
-
-      bool statusFileExists = await status.exists();
-      if (!statusFileExists) {
-        consoleLog("File does not exist at path: $statusPath");
-        return true;
+      if (await status.exists()) {
+        await status.delete();
       }
-
-      debugPrint("file exists: $statusFileExists");
-      debugPrint(" file exists on '$statusPath'");
-      debugPrint("stat: ${await status.stat()}");
-      if (await Permission.storage.request().isGranted) {
-        await status.delete(recursive: true);
-      }
-      consoleLog("Deleted file at path: $statusPath");
-
-      state = AsyncValue.data(await getStatuses());
+      final List<String> current = List<String>.from(state.value ?? []);
+      current.remove(statusPath);
+      state = AsyncValue.data(current);
       return true;
     } catch (e) {
       consoleLog(e, "Error deleting file at path: $statusPath");
@@ -104,9 +99,28 @@ class StatusesNotifier
   }
 }
 
+int _byNewestFirst(String a, String b) {
+  return _mtime(b).compareTo(_mtime(a));
+}
+
+int _mtime(String path) {
+  try {
+    return File(path).lastModifiedSync().millisecondsSinceEpoch;
+  } catch (_) {
+    return 0;
+  }
+}
+
 final statusesProvider =
     AsyncNotifierProvider.family<StatusesNotifier, List<String>, StatusTabType>(
         () => StatusesNotifier());
 
 final recentStatusesProvider = statusesProvider(StatusTabType.recent);
 final savedStatusesProvider = statusesProvider(StatusTabType.saved);
+
+final savedStatusFilenamesProvider = Provider<Set<String>>((ref) {
+  return ref.watch(savedStatusesProvider).maybeWhen(
+        data: (paths) => paths.map((path) => path.split('/').last).toSet(),
+        orElse: () => const <String>{},
+      );
+});

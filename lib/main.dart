@@ -1,10 +1,13 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:status_saver/src/localization/l10n/app_localizations.dart';
 import 'package:material_color_utilities/palettes/core_palette.dart';
+import 'package:status_saver/src/common/helpers/app_snackbar.dart';
 import 'package:status_saver/src/home/views/home_screen.dart';
 import 'package:status_saver/src/localization/notifiers/locale_notifier.dart';
 import 'package:status_saver/src/theme/app_theme.dart';
@@ -26,14 +29,15 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       restorationScopeId: 'app',
-      title: 'Whatsapp Status Saver',
+      scaffoldMessengerKey: appScaffoldMessengerKey,
+      title: 'Status Saver',
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
         AppLocalizations.delegate
       ],
-      locale: ref.watch(localeProvider), // TODO: revisit implementation
+      locale: ref.watch(localeProvider),
       supportedLocales: AppLocalizations.supportedLocales,
       themeMode: ref.watch(themeModeProvider),
       theme: AppTheme.themeData(corePalette, Brightness.light),

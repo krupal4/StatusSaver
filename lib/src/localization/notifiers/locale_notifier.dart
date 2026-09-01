@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:status_saver/src/localization/enums/language_code.dart';
 import 'package:status_saver/src/localization/extensions/on_build_context.dart';
 import 'package:status_saver/src/localization/extensions/on_string.dart';
-import 'package:status_saver/src/common/helpers/show_toast.dart';
+import 'package:status_saver/src/common/helpers/app_snackbar.dart';
 
 const languageCodeKey = "languageCode";
 const defaultLanguageCode = "en";
@@ -36,7 +36,11 @@ class LocaleNotifier extends StateNotifier<Locale?> {
           .setString(languageCodeKey, languageCode.name)
           .then((value) {
         if (!value) {
-          showToast(message: context.l10n.couldNotSaveYourLanguagePreference);
+          if (!context.mounted) {
+            return;
+          }
+          showAppSnackBar(
+              context, context.l10n.couldNotSaveYourLanguagePreference);
         }
       });
     });

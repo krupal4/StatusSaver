@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:status_saver/src/localization/extensions/on_build_context.dart';
-import 'package:status_saver/src/common/helpers/show_toast.dart';
+import 'package:status_saver/src/common/helpers/app_snackbar.dart';
 
 const themeModeTypeKey = "themeData";
 
@@ -22,7 +22,11 @@ class ThemeModeNotifier extends StateNotifier<ThemeMode?> {
           .setString(themeModeTypeKey, themeModeType)
           .then((value) {
         if (!value) {
-          showToast(message: context.l10n.couldNotSaveYourThemePreference);
+          if (!context.mounted) {
+            return;
+          }
+          showAppSnackBar(
+              context, context.l10n.couldNotSaveYourThemePreference);
         }
       });
     });
