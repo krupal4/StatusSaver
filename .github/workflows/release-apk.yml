@@ -3,7 +3,7 @@ name: Release APK
 on:
   push:
     branches:
-      - production
+      - development
   workflow_dispatch:
 
 permissions:
