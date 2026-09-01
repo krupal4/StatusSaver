@@ -1,0 +1,66 @@
+name: Release APK
+
+on:
+  push:
+    branches:
+      - production
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build release APK
+        run: flutter build apk --release
+
+      - name: Prepare release metadata
+        id: meta
+        run: |
+          VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}')
+          RUN_NUMBER="${{ github.run_number }}"
+          TAG="testing-v${VERSION}-${RUN_NUMBER}"
+          APK_NAME="status-saver-testing-v${VERSION}-${RUN_NUMBER}.apk"
+
+          mkdir -p dist
+          cp build/app/outputs/flutter-apk/app-release.apk "dist/${APK_NAME}"
+
+          {
+            echo "version=${VERSION}"
+            echo "tag=${TAG}"
+            echo "apk_name=${APK_NAME}"
+            echo "title=Testing APK v${VERSION} (build ${RUN_NUMBER})"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.meta.outputs.tag }}
+          name: ${{ steps.meta.outputs.title }}
+          prerelease: true
+          generate_release_notes: true
+          files: dist/${{ steps.meta.outputs.apk_name }}
+          body: |
+            Testing-only APK. This build is **debug-signed** and is not a Play Store release.
+
+            Testers: download the `.apk` below and install it (you may need to allow installing from unknown sources). Uninstall this app before installing a later build signed with a different key.
